@@ -72,8 +72,27 @@ export default Styled.div`
             }
         }
     }
+
+    div.action--container {
+        display: flex;
+        grid-gap: 1em;
+        svg {
+            font-size: 1.2rem;
+        }
+    }
     ul.ant-pagination {
         padding: 1em;
         padding-right: 2em;
+    }
+    table {
+        font-size: 0.9rem;
+    }
+
+    .badge--success {
+        background: rgba(0, 194, 83, 0.1);
+        border-radius: 2px;
+        color: #00C253;
+        font-size: 0.8rem;
+        padding: 0.5em;
     }
 `

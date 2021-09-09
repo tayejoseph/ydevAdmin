@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import { minQuery } from '../../helpers'
+import { minQuery, maxQuery } from '../../helpers'
 
 export default Styled.div`
     display: grid;
@@ -12,6 +12,9 @@ export default Styled.div`
         grid-template-columns: 1fr 1fr;
     }
     div.col--1 {
+        ${maxQuery('<lg')} {
+            display: none;
+        }
         display: flex;
         align-items: center;
         justify-content: center;

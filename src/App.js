@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Switch, Route, useLocation } from 'react-router-dom'
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
 import { IconContext } from 'react-icons'
 import { ThemeProvider } from 'styled-components'
 import { Auth, Dashboard } from './View'
@@ -26,6 +26,9 @@ const App = () => {
       <IconContext.Provider value={{ className: 'icon' }}>
         <div className="app--content">
           <Switch location={background || location}>
+            <Route path="/" exact>
+              <Redirect to={AppRoute.auth.signIn} />
+            </Route>
             <Route path={AppRoute.auth.initial} component={Auth} />
             <Route path={AppRoute.dashboard.initial} component={Dashboard} />
           </Switch>

@@ -50,14 +50,13 @@ export default styled.button`
     ${
       props.outlined &&
       css`
-        border: 1px solid ${props.theme.secondary};
+        border: 1px solid ${props.theme.primary};
         background-color: transparent;
-        color: ${props.theme.secondary};
-        padding: 0.5em 1em;
+        color: ${props.theme.primary};
         font-weight: 400;
         &:hover,
         &:focus {
-          background-color: ${props.theme.secondary};
+          background-color: ${props.theme.primary};
           color: #fff;
           outline: none;
         }

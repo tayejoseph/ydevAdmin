@@ -13,5 +13,6 @@ export default Styled.div`
     }
     div.content--container {
         padding: 1em;
+        height: 20rem;
     }
 `

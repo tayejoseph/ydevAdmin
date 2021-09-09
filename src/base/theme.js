@@ -10,6 +10,10 @@ const dimensions = {
   footerHeight: '3.5rem',
 }
 
+const colors = {
+  darkBlue: '#053161',
+}
+
 export const BREAKPOINTS = {
   sm: 576,
   md: 768,
@@ -20,6 +24,7 @@ export const BREAKPOINTS = {
 const theme = () => ({
   primary: '#1565E8',
   bgColor: '#F4F8FE',
+  colors,
   mixins,
   dimensions,
   fontFamily: 'Livvic',

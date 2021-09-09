@@ -1,3 +1,8 @@
 export { default as SectionHeader } from './SectionHeader'
 export { default as PalletItem } from './PalletItem'
 export { default as TableContainer } from './TableContainer'
+export { default as LineGraph } from './LineGraph'
+export { default as BarChart } from './BarChart'
+export { default as LineBars } from './LineBars'
+export { default as PieChart } from './PieChart'
+export { default as DashPallet } from './DashPallet'

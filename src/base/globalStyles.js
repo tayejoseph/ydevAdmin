@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { normalize } from 'polished'
+import { normalize, rgba } from 'polished'
 import { maxQuery } from '../helpers'
 
 export default createGlobalStyle`
@@ -64,10 +64,15 @@ export default createGlobalStyle`
       text-align: center;
     }
 
+    /* color */
+    .u--color__green {
+      color: #00C253;
+    }
     
-      .u--badge--green {
-          background: #D3F8EF;
-          color: #FF6C00;
+      .u--status--active {
+          background: ${rgba('#7FCA9F', 0.3)}!important;
+          color: #00C253!important;
+          width: fit-content;
       }
        .u--badge--blue {
           background: #CCE7FF;

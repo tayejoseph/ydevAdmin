@@ -1,4 +1,5 @@
 import Styled from 'styled-components'
+import { rgba } from 'polished'
 
 export default Styled.div`
     width: 100%;
@@ -13,7 +14,7 @@ export default Styled.div`
             height: 100%;
             mix-blend-mode: normal;
             opacity: 0.05;
-            border: 1.5px solid #000000;
+            border: 1.5px solid ${rgba('#000000', 0.3)};
             box-sizing: border-box;
             border-radius: 32px;
             color: #08225E;
@@ -30,7 +31,7 @@ export default Styled.div`
             top: 50%;
             transform: translateY(-50%);
             svg {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
         }
     }

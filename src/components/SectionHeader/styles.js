@@ -26,6 +26,7 @@ export default Styled.div`
     }
     h1 {
         font-weight: 600;
+        color: #021F4F;
         font-size: 1.5rem;
     }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
-import { MdNotificationsNone } from 'react-icons/md'
+import { FiBell } from 'react-icons/fi'
 import { SearchInput, Button } from '../../../UI'
 import Container from './styles'
 
@@ -12,7 +12,7 @@ const TopNav = () => {
       </div>
       <div className="action--tray">
         <Button icon className="nofication--btn">
-          <MdNotificationsNone />
+          <FiBell />
         </Button>
         <button className="profile--btn">
           <span className="img--container" />

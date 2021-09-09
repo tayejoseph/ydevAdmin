@@ -38,11 +38,4 @@ export default Styled.div`
             }
         }
     }
-    div.action--container {
-        display: flex;
-        grid-gap: 1em;
-        svg {
-            font-size: 1.2rem;
-        }
-    }
 `

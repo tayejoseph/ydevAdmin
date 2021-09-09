@@ -1,12 +1,23 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { DashHome, Users, Borrowers } from '../'
+import React, { useRef, useEffect } from 'react'
+import { Route, Switch, useLocation } from 'react-router-dom'
+import { DashHome, Users, Borrowers, Credit, Repayment } from '../'
 import { AppRoute } from '../../constants'
 import TopNav from './TopNav'
 import DashSideNav from './DashSideNav'
 import Container from './styles'
 
 const Dashboard = () => {
+  const contentContainerRef = useRef(null)
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    contentContainerRef.current.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    })
+  }, [pathname])
+
   return (
     <Container>
       <div className="dash--side__nav">
@@ -16,15 +27,26 @@ const Dashboard = () => {
         <div className="dashboard--top__nav">
           <TopNav />
         </div>
-        <div className="dashboard--content">
+        <div className="dashboard--content" ref={contentContainerRef}>
           <Switch>
             <Route
               path={AppRoute.dashboard.initial}
               exact
               component={DashHome}
             />
-            <Route path={AppRoute.dashboard.users} component={Users} />
-            <Route path={AppRoute.dashboard.borrowers} component={Borrowers} />
+            <Route path={AppRoute.dashboard.users.initial} component={Users} />
+            <Route
+              path={AppRoute.dashboard.borrowers.initial}
+              component={Borrowers}
+            />
+            <Route
+              path={AppRoute.dashboard.credit.initial}
+              component={Credit}
+            />
+            <Route
+              path={AppRoute.dashboard.repayment.initial}
+              component={Repayment}
+            />
           </Switch>
         </div>
       </main>

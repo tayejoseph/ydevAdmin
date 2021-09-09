@@ -19,7 +19,10 @@ export default Styled.div`
             &.nofication--btn {
                 margin-right: 1.5em;
                 .icon {
-                    font-size: 1.8rem;
+                    font-size: 1.5rem;
+                    color: #021F4F;
+                    /* stroke-width: 0;
+                    stroke: #021F4F; */
                 }
             }
             &.profile--btn {
@@ -28,14 +31,14 @@ export default Styled.div`
                 border: none;
                 display: flex;
                 align-items: center;
-                font-size: 1rem;
+                font-size: 0.9rem;
                 color: #021F4F;
                 span.img--container {
                     display: inline-block;
                     background: blue;
-                    height: 2.5rem;
+                    height: 2rem;
                     margin-right: 0.5em;
-                    width: 2.5rem;
+                    width: 2rem;
                     border-radius: 50%;
                 }
                 .icon {
