@@ -8,7 +8,7 @@ import {
   defaultDataSource,
 } from './tableData'
 import { TableContainer } from '../../../components'
-import { Picture, Doc, StackedCreditCard } from '../../../asset/convertedSvg'
+import { StackedCreditCard } from '../../../asset/convertedSvg'
 import Container from './styles'
 
 const Credit = () => {

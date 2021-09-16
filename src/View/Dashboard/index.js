@@ -1,6 +1,15 @@
 import React, { useRef, useEffect } from 'react'
 import { Route, Switch, useLocation } from 'react-router-dom'
-import { DashHome, Users, Borrowers, Credit, Repayment } from '../'
+import {
+  DashHome,
+  Users,
+  Borrowers,
+  Settings,
+  Credit,
+  Repayment,
+  Investors,
+  Reports,
+} from '../'
 import { AppRoute } from '../../constants'
 import TopNav from './TopNav'
 import DashSideNav from './DashSideNav'
@@ -46,6 +55,18 @@ const Dashboard = () => {
             <Route
               path={AppRoute.dashboard.repayment.initial}
               component={Repayment}
+            />
+            <Route
+              path={AppRoute.dashboard.reports.initial}
+              component={Reports}
+            />
+            <Route
+              path={AppRoute.dashboard.investors.initial}
+              component={Investors}
+            />
+            <Route
+              path={AppRoute.dashboard.settings.initial}
+              component={Settings}
             />
           </Switch>
         </div>

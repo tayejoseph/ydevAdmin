@@ -24,6 +24,7 @@ export const BREAKPOINTS = {
 const theme = () => ({
   primary: '#1565E8',
   bgColor: '#F4F8FE',
+  tertiary: 'pink',
   colors,
   mixins,
   dimensions,

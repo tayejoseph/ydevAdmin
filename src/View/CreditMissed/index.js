@@ -1,10 +1,9 @@
 import React from 'react'
-import { Switch, Route, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { AppRoute } from '../../constants'
 import { Button, FloatingInput } from '../../UI'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import { UserDetails, UsersEmail, UsersSms, UsersNew } from '../'
 import { columns, dataSource } from './tableData'
 import Container from './styles'
 
@@ -27,14 +26,6 @@ const CreditDue = () => {
             link: AppRoute.dashboard.credit.missed,
           },
         ]}
-        leftSection={
-          <Button
-            rounded
-            onClick={() => history.push(AppRoute.dashboard.users.new)}
-          >
-            Add New User
-          </Button>
-        }
       />
       <div className="pallet--grid__container">
         {palletItems.map((item) => (

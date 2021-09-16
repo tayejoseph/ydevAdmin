@@ -15,6 +15,22 @@ import {
 import { IoIosArrowForward } from 'react-icons/io'
 import Container from './styles'
 
+const reportSubMenu = [
+  // { title: 'Initial Reports', link: AppRoute.dashboard.reports.initial },
+  { title: 'Borrowers Reports', link: AppRoute.dashboard.reports.borrowers },
+  { title: 'Loan Reports', link: AppRoute.dashboard.reports.loan },
+  { title: 'Collection Reports', link: AppRoute.dashboard.reports.collection },
+  { title: 'Settlement Reports', link: AppRoute.dashboard.reports.settlement },
+]
+
+const investorsSubMenu = [
+  { title: 'View Investors', link: AppRoute.dashboard.investors.initial },
+  { title: 'Email Investors', link: AppRoute.dashboard.investors.email },
+  {
+    title: 'SMS Investors',
+    link: AppRoute.dashboard.investors.sms,
+  },
+]
 const DashSideNav = () => {
   const { pathname } = useLocation()
   console.log(doesRouteMatch(pathname, '/users'), 'sdkjsdskj')
@@ -63,7 +79,10 @@ const DashSideNav = () => {
         </NavLink>
         <div
           className={`submenu ${
-            doesRouteMatch('/borrowers', pathname) ? 'visible' : ''
+            doesRouteMatch('/borrowers', pathname) &&
+            !doesRouteMatch('/reports', pathname)
+              ? 'visible'
+              : ''
           }`}
         >
           <NavLink
@@ -132,17 +151,43 @@ const DashSideNav = () => {
           <IoIosArrowForward />
         </NavLink>
         <hr />
-        <NavLink className="menu" to={AppRoute.dashboard.investors}>
+        <NavLink className="menu" to={AppRoute.dashboard.investors.initial}>
           <Investors />
           <span>Investors</span>
           <IoIosArrowForward />
         </NavLink>
-        <NavLink className="menu" to={AppRoute.dashboard.reports}>
+
+        <div
+          className={`submenu ${
+            doesRouteMatch('/investors', pathname) ? 'visible' : ''
+          }`}
+        >
+          {investorsSubMenu.map((item) => (
+            <NavLink key={item.title} title={item.title} to={item.link} exact>
+              {item.title}
+            </NavLink>
+          ))}
+        </div>
+        <NavLink className="menu" to={AppRoute.dashboard.reports.borrowers}>
           <Reports />
           <span>Reports</span>
           <IoIosArrowForward />
         </NavLink>
-        <NavLink className="menu" to={AppRoute.dashboard.settings}>
+        <div
+          className={`submenu ${
+            doesRouteMatch('/reports', pathname) ? 'visible' : ''
+          }`}
+        >
+          {reportSubMenu.map((item) => (
+            <NavLink key={item.title} title={item.title} to={item.link} exact>
+              {item.title}
+            </NavLink>
+          ))}
+        </div>
+        <NavLink
+          className="menu"
+          to={`${AppRoute.dashboard.settings.initial}?tab=general`}
+        >
           <Settings />
           <span>Settings</span>
           <IoIosArrowForward />

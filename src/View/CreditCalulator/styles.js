@@ -2,6 +2,7 @@ import Styled from 'styled-components'
 import { minQuery } from '../../helpers'
 
 export default Styled.div`
+    padding-bottom: 2em;
     form {
         margin-top: 2em;
         h3 {

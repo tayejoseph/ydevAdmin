@@ -4,12 +4,7 @@ import { AppRoute } from '../../constants'
 import { Button } from '../../UI'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import {
-  CreditCalulator,
-  CreditMissed,
-  CreditOutstanding,
-  CreditDue,
-} from '../'
+import { RepaymentBulk } from '../'
 import { columns, dataSource } from './tableData'
 import Container from './styles'
 
@@ -23,30 +18,24 @@ const Repayment = () => {
   const history = useHistory()
   return (
     <Switch>
-      <Route path={AppRoute.dashboard.credit.due} component={CreditDue} />
       <Route
-        path={`${AppRoute.dashboard.credit.missed}`}
-        component={CreditMissed}
+        path={`${AppRoute.dashboard.repayment.bulk}`}
+        component={RepaymentBulk}
       />
-      <Route
-        path={`${AppRoute.dashboard.credit.outstanding}`}
-        component={CreditOutstanding}
-      />
-      <Route
-        path={`${AppRoute.dashboard.credit.calculator}`}
-        component={CreditCalulator}
-      />
-      <Route path={AppRoute.dashboard.credit.inital} exact>
+      <Route path={AppRoute.dashboard.repayment.inital} exact>
         <Container>
           <SectionHeader
             title="Repayments"
             links={[
-              { title: 'Repayments', link: AppRoute.dashboard.credit.initial },
+              {
+                title: 'Repayments',
+                link: AppRoute.dashboard.repayment.initial,
+              },
             ]}
             leftSection={
               <Button
                 rounded
-                onClick={() => history.push(AppRoute.dashboard.credit.new)}
+                onClick={() => history.push(AppRoute.dashboard.repayment.bulk)}
               >
                 Add Bulk Repayment
               </Button>
@@ -75,7 +64,7 @@ const Repayment = () => {
                 return {
                   onClick: (event) => {
                     history.push(
-                      `${AppRoute.dashboard.credit.initial}/${record.key}?tab=accounts`,
+                      `${AppRoute.dashboard.repayment.initial}/${record.key}?tab=accounts`,
                     )
                   },
                 }

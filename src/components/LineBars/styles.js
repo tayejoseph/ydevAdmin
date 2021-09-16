@@ -15,20 +15,21 @@ export default Styled.div`
                 color: #021F4F;
             }
         }
-        div.bar {
-            height: 1.5rem;
-            margin-top: 0.25em;
-            background: rgba(204, 204, 204, 0.3);
-            position: relative;
-            &:after {
-                content: "";
-                position: absolute;
-                top: 0px;
-                height: 1.5rem;
-                left: 0px;
-                background: attr(data-color);
-                width: attr(data-percentage);
-            }
-        }
+    }
+`
+
+export const ItemContainer = Styled.div`
+    height: 1.5rem;
+    margin-top: 0.25em;
+    background: rgba(204, 204, 204, 0.3);
+    position: relative;
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0px;
+        height: 1.5rem;
+        left: 0px;
+        background-color: ${({ color }) => color};
+        width: ${({ percentage }) => percentage};
     }
 `

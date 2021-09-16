@@ -13,6 +13,9 @@ export default Styled.div`
         }
     }
     nav {
+        ${({ theme }) => theme.mixins.scrollbar};
+        min-height: ${({ theme }) =>
+          `calc(100vh - ${theme.dimensions.navHeight})`};
         padding-top: ${({ theme }) => theme.dimensions.dashTopPadding};
         padding-left: 1em;
         a.menu {

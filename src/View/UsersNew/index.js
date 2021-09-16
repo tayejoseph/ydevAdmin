@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AppRoute } from '../../constants'
-import { Button, InputGroup } from '../../UI'
-import { SectionHeader, TableContainer } from '../../components'
+import { Button, InputGroup, Uploader } from '../../UI'
+import { SectionHeader } from '../../components'
 import Container from './styles'
 
 const UsersNew = () => {
@@ -118,18 +118,8 @@ const UsersNew = () => {
         <section>
           <h2>Uploads</h2>
           <div className="input--row">
-            <InputGroup
-              label="Subject"
-              onChange={handleInput}
-              name="subject"
-              value={formData.subject}
-            />
-            <InputGroup
-              label="User Type"
-              onChange={handleInput}
-              name="userType"
-              value={formData.userType}
-            />
+            <Uploader label="Selfie" />
+            <Uploader label="Verification documents" />
           </div>
         </section>
         <Button type="submit">Create User</Button>

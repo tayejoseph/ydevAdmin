@@ -70,8 +70,6 @@ const DashHome = () => {
             }}
           />
         </PalletItem>
-        {/* <PalletItem title="Principal - Due vs Collections - Monthly"></PalletItem>
-        <PalletItem title="Interest - Due vs Collections - Monthly"></PalletItem> */}
         <PalletItem
           className="full--span"
           title="Number of Open Loans(Cumulative) - Monthly"

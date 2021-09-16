@@ -1,5 +1,7 @@
 import React from 'react'
-import Container from './styles'
+import Container, { ItemContainer } from './styles'
+
+const BarItem = (props) => <ItemContainer className="bar" {...props} />
 
 const LineBars = ({ data = [], color = '#7367F0' }) => {
   return (
@@ -10,11 +12,7 @@ const LineBars = ({ data = [], color = '#7367F0' }) => {
             <h3>{item.title}</h3>
             <p>{item.percentage}/100%</p>
           </div>
-          <div
-            className="bar"
-            data-color={color}
-            data-percentage={`${item.percentage}%`}
-          />
+          <BarItem percentage={`${item.percentage}%`} color={color} />
         </div>
       ))}
     </Container>

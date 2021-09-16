@@ -42,17 +42,35 @@ const AppRoute = {
     },
     repayment: {
       initial: `${initialDashRoute}/repayment`,
-      due: `${initialDashRoute}/credit/due`,
-      missed: `${initialDashRoute}/credit/missedPayment`,
-      outstanding: `${initialDashRoute}/credit/outstanding`,
-      calculator: `${initialDashRoute}/credit/calculator`,
+      bulk: `${initialDashRoute}/repayment/bulk`,
       params: {
         userId: 'userId',
       },
     },
-    investors: `${initialDashRoute}/investors`,
-    reports: `${initialDashRoute}/reports`,
-    settings: `${initialDashRoute}/settings`,
+    investors: {
+      initial: `${initialDashRoute}/investors`,
+      email: `${initialDashRoute}/investors/email`,
+      sms: `${initialDashRoute}/investors/sms`,
+      outstanding: `${initialDashRoute}/investors/outstanding`,
+      creditCal: `${initialDashRoute}/investors/creditCalculator`,
+      investorDetails: `${initialDashRoute}/investor/details`,
+      params: {
+        userId: 'userId',
+      },
+    },
+    reports: {
+      initial: `${initialDashRoute}/reports`,
+      borrowers: `${initialDashRoute}/reports/borrowers`,
+      loan: `${initialDashRoute}/reports/loan`,
+      collection: `${initialDashRoute}/reports/collection`,
+      settlement: `${initialDashRoute}/reports/settlement`,
+      params: {
+        userId: 'userId',
+      },
+    },
+    settings: {
+      initial: `${initialDashRoute}/settings`,
+    },
   },
 }
 

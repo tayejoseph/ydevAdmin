@@ -32,14 +32,18 @@ export default Styled.div`
                 margin-bottom: 0.5em;
             }
             &:before {
-                /* position: absolute; */
                 content: "";
                 margin-right: 0.5em;
                 width: 15px;
                 height: 15px;
                 display: block;
                 border-radius: 50%;
-                border: 4px solid attr(data-color);
+                border: 4px solid #FF9F43;
+            }
+            &:first-of-type {
+                &:before {
+                    border: 4px solid #00C253;
+                }
             }
         }
     }

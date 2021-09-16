@@ -24,14 +24,6 @@ const CreditDue = () => {
           { title: 'Credit', link: AppRoute.dashboard.credit.initial },
           { title: 'Due Credit', link: AppRoute.dashboard.credit.due },
         ]}
-        leftSection={
-          <Button
-            rounded
-            onClick={() => history.push(AppRoute.dashboard.users.new)}
-          >
-            Add New User
-          </Button>
-        }
       />
       <div className="pallet--grid__container">
         {palletItems.map((item) => (

@@ -3,6 +3,7 @@ import { rgba } from 'polished'
 import { minQuery } from '../../helpers'
 
 export default Styled.div`
+    padding-bottom: 4em;
     form {
         margin-top: 2em;
         section {
@@ -23,7 +24,7 @@ export default Styled.div`
                 display: grid;
                 ${minQuery('lg')} {
                     grid-template-columns: 1fr 1fr;
-                    grid-gap: 2em;
+                    grid-gap: 4em;
                 }
             }
         }

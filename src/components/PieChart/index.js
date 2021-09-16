@@ -1,5 +1,5 @@
 import React from 'react'
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, ResponsiveContainer, Cell } from 'recharts'
 import Container from './styles'
 
 const data = [
@@ -7,30 +7,26 @@ const data = [
   { name: 'Group B', value: 300, color: '#FF9F43' },
 ]
 
-const COLORS = ['00C253', '#FF9F43']
+const COLORS = ['#00C253', '#FF9F43']
 
 const CustomPieChart = ({ fillOne = '#1461DE', fillTwo = '#FF9F43' }) => {
   return (
     <Container>
       <div className="col--1">
         <ResponsiveContainer width={'100%'} height={'100%'}>
-          <PieChart>
+          <PieChart width={730} height={250}>
             <Pie
               data={data}
               cx="50%"
               cy="50%"
-              innerRadius={85}
               outerRadius={110}
-              fill="#8884d8"
-              paddingAngle={5}
-              dataKey="value"
-            />
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
+              innerRadius={85}
+              label
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index]} />
+              ))}
+            </Pie>
           </PieChart>
         </ResponsiveContainer>
       </div>
