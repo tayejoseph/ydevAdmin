@@ -47,7 +47,7 @@ export default Styled.div`
                 h1 {
                     font-size: 1.5rem;
                     margin-bottom: 1.5em;
-                    font-weight: 500;
+                    font-weight: 600;
                 }
             }
             div.forgot--password__container {

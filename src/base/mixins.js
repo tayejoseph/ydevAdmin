@@ -23,7 +23,16 @@ const mixins = {
     max-width: ${({ theme }) => theme.dimensions.maxWidth};
     margin: 0 auto;
   `,
-
+  hideScollbarHorizontal: css`
+    & {
+      overflow-x: auto;
+      -ms-overflow-style: none; /* IE 11 */
+      scrollbar-width: none; /* Firefox 64 */
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  `,
   scrollbar: css`
     & {
       overflow-y: overlay;

@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Switch, useLocation } from 'react-router-dom'
 import {
   DashHome,
@@ -9,15 +10,23 @@ import {
   Repayment,
   Investors,
   Reports,
+  Plans,
 } from '../'
-import { AppRoute } from '../../constants'
+import { AppRoute, dashboardConstant } from '../../constants'
+import { getRoles } from '../../store/action'
 import TopNav from './TopNav'
 import DashSideNav from './DashSideNav'
 import Container from './styles'
 
 const Dashboard = () => {
+  const [showNav, setDisplay] = useState(false)
+  const dispatch = useDispatch()
   const contentContainerRef = useRef(null)
   const { pathname } = useLocation()
+
+  useEffect(() => {
+    dispatch(getRoles())
+  }, [dispatch])
 
   useEffect(() => {
     contentContainerRef.current.scrollTo({
@@ -29,14 +38,23 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <div className="dash--side__nav">
+      <div
+        className={`dash--side__nav ${showNav ? 'show--nav' : 'hide--nav'}`}
+        onClick={() => setDisplay(false)}
+      >
         <DashSideNav />
       </div>
       <main className="dashboard--main">
         <div className="dashboard--top__nav">
-          <TopNav />
+          <TopNav
+            {...{ handleToggleMenu: () => setDisplay(!showNav), showNav }}
+          />
         </div>
-        <div className="dashboard--content" ref={contentContainerRef}>
+        <div
+          className="dashboard--content"
+          id={dashboardConstant.dashboardId}
+          ref={contentContainerRef}
+        >
           <Switch>
             <Route
               path={AppRoute.dashboard.initial}
@@ -68,6 +86,7 @@ const Dashboard = () => {
               path={AppRoute.dashboard.settings.initial}
               component={Settings}
             />
+            <Route path={AppRoute.dashboard.plans.initial} component={Plans} />
           </Switch>
         </div>
       </main>

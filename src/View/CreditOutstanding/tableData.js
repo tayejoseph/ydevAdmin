@@ -59,14 +59,3 @@ export const columns = [
     ),
   },
 ]
-export const dataSource = [...Array(10).keys()].map((item, index) => ({
-  key: uuid(),
-  name: 'John Doe',
-  creditType: 'Bumpa Credit',
-  amt: '500,000',
-  interest: '25,000',
-  dueDate: '12th July, 2021',
-  paid: '50,000',
-  pastDue: '3000',
-  pendingDue: '3,680',
-}))

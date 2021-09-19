@@ -31,6 +31,40 @@ const investorsSubMenu = [
     link: AppRoute.dashboard.investors.sms,
   },
 ]
+
+const borrowersSubMenu = [
+  { title: 'View Borrowers', link: AppRoute.dashboard.borrowers.initial },
+  { title: 'Email Borrowers', link: AppRoute.dashboard.borrowers.email },
+  {
+    title: 'SMS Borrowers',
+    link: AppRoute.dashboard.borrowers.sms,
+  },
+]
+
+const usersSubMenu = [
+  { title: 'View Users', link: AppRoute.dashboard.users.initial },
+  { title: 'Email Users', link: AppRoute.dashboard.users.email },
+  {
+    title: 'SMS Users',
+    link: AppRoute.dashboard.users.sms,
+  },
+]
+
+const creditSubMenu = [
+  { title: 'View All Credit', link: AppRoute.dashboard.credit.initial },
+  { title: 'Due Credit', link: AppRoute.dashboard.credit.due },
+  { title: 'Missed Payments', link: AppRoute.dashboard.credit.missed },
+  {
+    title: 'Principal Outstanding',
+    link: AppRoute.dashboard.credit.outstanding,
+  },
+  { title: 'Credit Calculator', link: AppRoute.dashboard.credit.calculator },
+  {
+    title: 'SMS Users',
+    link: AppRoute.dashboard.users.sms,
+  },
+]
+
 const DashSideNav = () => {
   const { pathname } = useLocation()
   console.log(doesRouteMatch(pathname, '/users'), 'sdkjsdskj')
@@ -58,21 +92,29 @@ const DashSideNav = () => {
             doesRouteMatch('/users', pathname) ? 'visible' : ''
           }`}
         >
-          <NavLink
-            title={'View Users'}
-            to={AppRoute.dashboard.users.view}
-            exact
-          >
-            View Users
-          </NavLink>
-          <NavLink title={'Email Users'} to={AppRoute.dashboard.users.email}>
-            Email Users
-          </NavLink>
-          <NavLink title={'SMS Users'} to={AppRoute.dashboard.users.sms}>
-            SMS Users
-          </NavLink>
+          {usersSubMenu.map((item) => (
+            <NavLink key={item.title} title={item.title} to={item.link} exact>
+              {item.title}
+            </NavLink>
+          ))}
         </div>
-        <NavLink className="menu" to={AppRoute.dashboard.borrowers.initial}>
+        <NavLink
+          className={`menu hasMenu`}
+          to={AppRoute.dashboard.plans.initial}
+        >
+          <Users />
+          <span>Plans</span>
+          <IoIosArrowForward />
+        </NavLink>
+        <NavLink
+          className="menu"
+          onClick={(e) => {
+            if (borrowersSubMenu.length > 0) {
+              e.stopPropagation()
+            }
+          }}
+          to={AppRoute.dashboard.borrowers.initial}
+        >
           <Settings />
           <span>Borrowers</span>
           <IoIosArrowForward />
@@ -85,25 +127,11 @@ const DashSideNav = () => {
               : ''
           }`}
         >
-          <NavLink
-            title={'View Borrowers'}
-            to={AppRoute.dashboard.borrowers.initial}
-            exact
-          >
-            View Borrowers
-          </NavLink>
-          <NavLink
-            title={'Email Borrowers'}
-            to={AppRoute.dashboard.borrowers.email}
-          >
-            Email Borrowers
-          </NavLink>
-          <NavLink
-            title={'SMS Borrowers'}
-            to={AppRoute.dashboard.borrowers.sms}
-          >
-            SMS Borrowers
-          </NavLink>
+          {borrowersSubMenu.map((item) => (
+            <NavLink key={item.title} title={item.title} to={item.link} exact>
+              {item.title}
+            </NavLink>
+          ))}
         </div>
         <hr />
         <NavLink className="menu" to={AppRoute.dashboard.credit.initial}>
@@ -116,34 +144,11 @@ const DashSideNav = () => {
             doesRouteMatch('/credit', pathname) ? 'visible' : ''
           }`}
         >
-          <NavLink
-            title={'View Borrowers'}
-            to={AppRoute.dashboard.credit.initial}
-            exact
-          >
-            View All Credit
-          </NavLink>
-          <NavLink title={'Email Borrowers'} to={AppRoute.dashboard.credit.due}>
-            Due Credit
-          </NavLink>
-          <NavLink
-            title={'SMS Borrowers'}
-            to={AppRoute.dashboard.credit.missed}
-          >
-            Missed Payments
-          </NavLink>
-          <NavLink
-            title={'SMS Borrowers'}
-            to={AppRoute.dashboard.credit.outstanding}
-          >
-            Principal Outstanding
-          </NavLink>
-          <NavLink
-            title={'SMS Borrowers'}
-            to={AppRoute.dashboard.credit.calculator}
-          >
-            Credit Calculator
-          </NavLink>
+          {creditSubMenu.map((item) => (
+            <NavLink key={item.title} title={item.title} to={item.link} exact>
+              {item.title}
+            </NavLink>
+          ))}
         </div>
         <NavLink className="menu" to={AppRoute.dashboard.repayment.initial}>
           <Repayments />

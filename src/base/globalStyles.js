@@ -39,7 +39,7 @@ export default createGlobalStyle`
         padding: 0px;
       }
       div.app--content {
-        width: 90%;
+        width: 95%;
         padding-top: ${({ theme }) => theme.dimensions.navHeight};
         ${maxQuery('lg')} {
           padding-top: ${({ theme }) => theme.dimensions.navHeightMobile};

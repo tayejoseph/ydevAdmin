@@ -16,10 +16,14 @@ const AppRoute = {
       groups: `${initialDashRoute}/users/groups`,
       email: `${initialDashRoute}/users/email`,
       sms: `${initialDashRoute}/users/sms`,
-      new: `${initialDashRoute}/users/new`,
+      details: `${initialDashRoute}/users/details`,
       params: {
         userId: 'userId',
       },
+    },
+    plans: {
+      initial: `${initialDashRoute}/plans`,
+      details: `${initialDashRoute}/plans/details`,
     },
     borrowers: {
       initial: `${initialDashRoute}/borrowers`,

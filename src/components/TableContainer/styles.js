@@ -14,7 +14,7 @@ export default Styled.div`
             font-weight: 600;
         }
     }
-    div.grid--container {
+    div.table--grid__container {
         display: grid;
         grid-gap: 1em;
         width: 100%;
@@ -70,6 +70,13 @@ export default Styled.div`
                 height: 2.5rem;
                 background-color: transparent!important;
             }
+        }
+    }
+    div.table--container {
+        overflow-x: auto;
+        ${({ theme }) => theme.mixins.hideScollbarHorizontal};
+        div.ant-table-wrapper {
+            min-width: 50rem;
         }
     }
 

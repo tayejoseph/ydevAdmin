@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppRoute } from '../../constants'
-import { Button, FloatingInput } from '../../UI'
+import { FloatingInput } from '../../UI'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { getMissedRepayment } from '../../store/action'
+import { columns } from './tableData'
 import Container from './styles'
 
 const palletItems = [
@@ -15,6 +17,13 @@ const palletItems = [
 
 const CreditDue = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
+  const { missedRepaymentLists } = useSelector((state) => state.adminData)
+
+  useEffect(() => {
+    dispatch(getMissedRepayment())
+  }, [dispatch])
+
   return (
     <Container>
       <SectionHeader
@@ -63,7 +72,7 @@ const CreditDue = () => {
         {...{
           title: 'Missed Repayments',
           columns,
-          dataSource,
+          dataSource: missedRepaymentLists,
           onRow: (record, rowIndex) => {
             return {
               onClick: (event) => {

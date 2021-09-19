@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppRoute } from '../../constants'
-import { Button, FloatingInput } from '../../UI'
+import { FloatingInput } from '../../UI'
 import { UsersPallet } from '../../asset/convertedSvg'
+import { getPrincipalOutStanding } from '../../store/action'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
 import Container from './styles'
 
 const palletItems = [
@@ -14,7 +16,14 @@ const palletItems = [
 ]
 
 const CreditOutstanding = () => {
+  const dispatch = useDispatch()
   const history = useHistory()
+  const { principalOutstandingLists } = useSelector((state) => state.adminData)
+
+  useEffect(() => {
+    dispatch(getPrincipalOutStanding())
+  }, [dispatch])
+
   return (
     <Container>
       <SectionHeader
@@ -63,7 +72,7 @@ const CreditOutstanding = () => {
         {...{
           title: 'Principal Outstanding',
           columns,
-          dataSource,
+          dataSource: principalOutstandingLists,
           onRow: (record, rowIndex) => {
             return {
               onClick: (event) => {

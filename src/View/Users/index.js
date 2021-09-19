@@ -1,32 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route, useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { AppRoute } from '../../constants'
 import { Button } from '../../UI'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
 import { UserDetails, UsersEmail, UsersSms, UsersNew } from '../'
-import { columns, dataSource } from './tableData'
+import { getUsers } from '../../store/action'
+import { columns } from './tableData'
 import Container from './styles'
 
-const palletItems = [
-  { title: 'Total Number of Users', value: '5.5k' },
-  { title: 'Active Users', value: '5.5k' },
-  { title: 'Banned users', value: '40' },
-]
-
 const Users = () => {
+  const dispatch = useDispatch()
+  const { usersData } = useSelector((state) => state.adminData)
   const history = useHistory()
+  const palletItems = [
+    {
+      title: 'Total Number of Users',
+      value: Number(usersData?.total_number_of_users),
+    },
+    { title: 'Active Users', value: Number(usersData?.active_users) },
+    { title: 'Banned users', value: Number(usersData?.banned_users) },
+  ]
+
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
+
   return (
     <Switch>
-      <Route path={AppRoute.dashboard.users.new} component={UsersNew} />
       <Route
         path={`${AppRoute.dashboard.users.email}`}
         component={UsersEmail}
       />
       <Route path={`${AppRoute.dashboard.users.sms}`} component={UsersSms} />
       <Route
-        path={`${AppRoute.dashboard.users.initial}/:userId`}
+        path={`${AppRoute.dashboard.users.details}/:userId`}
         component={UserDetails}
+      />
+
+      <Route
+        path={`${AppRoute.dashboard.users.initial}/:userId`}
+        component={UsersNew}
       />
       <Route path={AppRoute.dashboard.users.inital} exact>
         <Container>
@@ -36,7 +51,9 @@ const Users = () => {
             leftSection={
               <Button
                 rounded
-                onClick={() => history.push(AppRoute.dashboard.users.new)}
+                onClick={() =>
+                  history.push(`${AppRoute.dashboard.users.initial}/new`)
+                }
               >
                 Add New User
               </Button>
@@ -59,13 +76,20 @@ const Users = () => {
           <TableContainer
             {...{
               title: 'All Users',
-              columns,
-              dataSource,
+              columns: columns({
+                handleDeleteClick: (row) => {
+                  console.log(row)
+                },
+                handleEditClick: (row) => {
+                  history.push(`${AppRoute.dashboard.users.initial}/${row.id}`)
+                },
+              }),
+              dataSource: usersData?.users,
               onRow: (record, rowIndex) => {
                 return {
                   onClick: (event) => {
                     history.push(
-                      `${AppRoute.dashboard.users.initial}/${record.key}?tab=accounts`,
+                      `${AppRoute.dashboard.users.details}/${record.id}?tab=accounts`,
                     )
                   },
                 }

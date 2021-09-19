@@ -5,10 +5,8 @@ import Spinner from '../Spinner'
 const Button = ({
   disabled = false,
   loading = false,
-  primary,
+  primary = true,
   secondary,
-  badge,
-  outlined,
   tertiary,
   full,
   style,
@@ -16,38 +14,47 @@ const Button = ({
   type = 'button',
   className,
   rounded,
-  plain,
   icon,
   iconRight,
   iconLeft,
   bordered,
+  spinnerWithTxt = false,
   hasShadow,
   onClick,
   children,
   ...rest
 }) => {
-  const isPrimary = !secondary && !tertiary && !plain && !outlined
   return (
     <Container
-      className={`btn u--typo__btn ${className ? className : ''}`}
+      className={`btn u--typo__btn ${loading ? 'loading--btn' : ''} ${
+        className ? className : ''
+      }`}
       icon={icon ? icon : undefined}
       iconRight={iconRight ? iconRight : undefined}
+      spinnerWithTxt={spinnerWithTxt ? spinnerWithTxt : undefined}
       iconLeft={iconLeft ? iconLeft : undefined}
       disabled={disabled ? disabled : loading ? true : false}
-      primary={primary || isPrimary ? true : undefined}
+      primary={primary}
       secondary={secondary ? secondary : undefined}
-      outlined={outlined ? outlined : undefined}
       tertiary={tertiary ? tertiary : undefined}
-      plain={plain ? plain : undefined}
       rounded={rounded ? rounded : undefined}
+      // hasShadow={hasShadow ? hasShadow : undefined}
+      // bordered={bordered ? bordered : undefined}
       full={full ? full : undefined}
+      small={small ? small : undefined}
       onClick={onClick}
+      // loading={loading ? JSON.stringify(loading) : undefined}
       type={type}
       style={style}
       {...rest}
     >
-      {badge && <span className="badge--container">{badge}</span>}
-      {loading ? <Spinner /> : children}
+      {spinnerWithTxt ? (
+        <>
+          {loading && <Spinner size={'1rem'} />} {children}
+        </>
+      ) : (
+        <>{loading ? <Spinner size={'1rem'} /> : children}</>
+      )}
     </Container>
   )
 }

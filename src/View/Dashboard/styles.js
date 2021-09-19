@@ -1,4 +1,5 @@
 import Styled from 'styled-components'
+import { maxQuery, minQuery } from '../../helpers'
 
 export default Styled.div`
     width: 100vw;
@@ -8,11 +9,33 @@ export default Styled.div`
     overflow-y: auto;
     top: 0px;
     left: 0px;
-    display: grid;
-    grid-template-columns: 18rem 1fr;
+    ${minQuery('>xl')} {
+        display: grid;
+        grid-template-columns: 18rem 1fr;
+    }
     div.dash--side__nav {
         height: 100vh;
-        background: ${({ theme }) => theme.primary};
+        ${maxQuery('xl')} {
+            transform: translateX(-100vw);
+            position: fixed;
+            transition: all 0.9s;
+            width: 20rem;
+            z-index: 999;
+            &::before {
+                content: "";
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                width: 100vw;
+                height: 100vh;
+                z-index: -1;
+                background: rgba(3, 35, 46, 0.24);
+                backdrop-filter: blur(0.7px);
+            }
+            &.show--nav {
+                transform: translateX(0);
+            }
+        }
     }
     main.dashboard--main {
         flex: 1;

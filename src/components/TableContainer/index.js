@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table } from 'antd'
+import { CSVLink } from 'react-csv'
 import { Button } from '../../UI'
 import Container from './styles'
 
@@ -17,7 +18,7 @@ const TableContainer = ({
       <header className="table--header">
         <h1>{title}</h1>
       </header>
-      <div className="grid--container">
+      <div className="table--grid__container">
         <div className="header--action">
           <p>Show</p>
           <Button>5</Button>
@@ -27,12 +28,21 @@ const TableContainer = ({
           <div className="input--container">
             <input placeholder="Search" />
           </div>
-          <button>Export Data</button>
+          <CSVLink data={dataSource ? dataSource : []}>
+            <button>Export Data</button>
+          </CSVLink>
         </form>
       </div>
-
-      {rowContent && rowContent()}
-      {children ? children : <Table {...{ dataSource, columns, ...props }} />}
+      <div className="table--container">
+        {rowContent && rowContent()}
+        {children ? (
+          children
+        ) : (
+          <Table
+            {...{ dataSource: dataSource ? dataSource : [], columns, ...props }}
+          />
+        )}
+      </div>
     </Container>
   )
 }

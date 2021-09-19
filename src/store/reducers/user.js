@@ -1,43 +1,29 @@
-import produce from 'immer'
+import { userTypes } from '../types'
 
 const initState = {
-  childrenLists: [],
-  orderLists: [],
+  authenticated: false,
+  userDetails: '',
 }
 
-const UserReducer = produce((draftState, action) => {
-  let index
-  const { type, data, actionType } = action
+const UserReducer = (state = initState, action) => {
+  const { type, data } = action
+
   switch (type) {
-    case 'CHILDREN_LISTS':
-      if (actionType === 'add') {
-        draftState.childrenLists.push(data)
-      } else {
-        index = draftState.childrenLists.findIndex(
-          (item) => item.id === data.id,
-        )
-        if (actionType === 'delete') {
-          delete draftState.childrenLists[index]
-        } else {
-          draftState.childrenLists[index] = data
-        }
+    case userTypes.clearState:
+      return initState
+    case userTypes.altAuthState:
+      return {
+        ...state,
+        authenticated: data,
       }
-      break
-    case 'OREDER_LISTS':
-      if (actionType === 'add') {
-        draftState.orderLists.push(data)
-      } else {
-        index = draftState.orderLists.findIndex((item) => item.id === data.id)
-        if (actionType === 'delete') {
-          delete draftState.orderLists[index]
-        } else {
-          draftState.orderLists[index] = data
-        }
+    case userTypes.altUserDetails:
+      return {
+        ...state,
+        userDetails: data,
       }
-      break
     default:
-      return draftState
+      return state
   }
-}, initState)
+}
 
 export default UserReducer

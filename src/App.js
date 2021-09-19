@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
 import { IconContext } from 'react-icons'
+import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import { Auth, Dashboard } from './View'
 import { AppRoute } from './constants'
@@ -18,6 +19,7 @@ const ScrollToTop = () => {
 
 const App = () => {
   const location = useLocation()
+  const { authenticated } = useSelector((state) => state.userData)
   let background = location.state && location.state.background
 
   return (
@@ -29,8 +31,20 @@ const App = () => {
             <Route path="/" exact>
               <Redirect to={AppRoute.auth.signIn} />
             </Route>
-            <Route path={AppRoute.auth.initial} component={Auth} />
-            <Route path={AppRoute.dashboard.initial} component={Dashboard} />
+            <Route path={AppRoute.auth.initial}>
+              {authenticated ? (
+                <Redirect to={AppRoute.dashboard.initial} />
+              ) : (
+                <Auth />
+              )}
+            </Route>
+            <Route path={AppRoute.dashboard.initial}>
+              {authenticated ? (
+                <Dashboard />
+              ) : (
+                <Redirect to={AppRoute.auth.signIn} />
+              )}
+            </Route>
           </Switch>
         </div>
         <ScrollToTop />

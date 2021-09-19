@@ -8,12 +8,10 @@ const SectionHeader = ({ links = [], title, leftSection }) => {
       <div className="col--1">
         <nav>
           {links.map((item, index) => (
-            <>
-              <NavLink key={item.title} to={item.link}>
-                {item.title}
-              </NavLink>
+            <React.Fragment key={item.title}>
+              <NavLink to={item.link}>{item.title}</NavLink>
               {index !== links.length - 1 && <span> > </span>}
-            </>
+            </React.Fragment>
           ))}
         </nav>
         <h1>{title}</h1>

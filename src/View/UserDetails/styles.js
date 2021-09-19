@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import { minQuery } from '../../helpers'
+import { minQuery, maxQuery } from '../../helpers'
 
 export default Styled.div`
     div.component--header {
@@ -23,18 +23,29 @@ export default Styled.div`
                 position: relative;
                 padding: 0em 1.5em;
                 padding-top: 1.5em;
-                ${minQuery('lg')} {
+                ${minQuery('md')} {
                     grid-template-columns: 13rem 1fr auto;
                 }
                  div.profile--img {
                     width: 9rem;
                     height: 9rem;
-                    transform: translate(40%, calc(-50% - 2em));
+                    ${maxQuery('<md')} {
+                        left: 50%;
+                        transform: translateX(-50%);
+                        position: absolute;
+                        top: -50%;
+                    }
+                    ${minQuery('md')} {
+                        transform: translate(40%, calc(-50% - 2em));
+                    }
                     background: blue;
                     border-radius: 50%;
                     border: 4px solid #fff;
                 }
                 div.profile--details {
+                    ${maxQuery('>md')} {
+                        margin-top: 2em;
+                    }
                     h2 {
                         font-weight: 700;
                         font-size: 1.6rem;
@@ -52,7 +63,9 @@ export default Styled.div`
                 }
             }
             div.ant-tabs {
-                margin-top: -2em;
+                ${minQuery('md')} {
+                    margin-top: -2em;
+                }
                 position: relative;
                 z-index: 2;
             }

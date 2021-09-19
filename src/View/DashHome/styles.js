@@ -18,11 +18,12 @@ export default Styled.div`
         display: grid;
         margin-top: 3em;
         grid-gap: 1.5em;
+        grid-template-columns: 1fr;
         ${minQuery('md')} {
             grid-template-columns: 1fr 1fr;
-        }
-        div.full--span {
-            grid-column: 1 / 3;
+            div.full--span {
+                grid-column: 1 / 3;
+            }
         }
     }
 

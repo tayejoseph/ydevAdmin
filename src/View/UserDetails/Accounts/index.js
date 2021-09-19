@@ -1,8 +1,10 @@
 import React from 'react'
+import moment from 'moment'
 import { Picture, Doc } from '../../../asset/convertedSvg'
 import Container from './styles'
 
-const Accounts = () => {
+const Accounts = ({ activeUser }) => {
+  console.log(activeUser, 'sdjksddksdkj')
   return (
     <Container>
       <div className="col--1">
@@ -12,19 +14,21 @@ const Accounts = () => {
         <div className="content--item">
           <div className="item--row">
             <p>Full Name</p>
-            <p>John Doe</p>
+            <p>
+              {activeUser?.sname} {activeUser?.fname}
+            </p>
           </div>
           <div className="item--row">
             <p>Email Address</p>
-            <p>johndoe@gmail.com</p>
+            <p>{activeUser?.email}</p>
           </div>{' '}
           <div className="item--row">
             <p>Phone Number</p>
-            <p>08032805684</p>
+            <p>{activeUser?.phone}</p>
           </div>{' '}
           <div className="item--row">
             <p>Home Address</p>
-            <p>12, johndoe street, lekki, Lagos</p>
+            <p>{activeUser?.house_address}</p>
           </div>{' '}
           <div className="item--row">
             <p>Last Login</p>
@@ -36,7 +40,11 @@ const Accounts = () => {
           </div>
           <div className="item--row">
             <p>Date of Birth</p>
-            <p>24th July, 2021</p>
+            <p>
+              {activeUser?.date_of_birth
+                ? moment(activeUser.date_of_birth).format('MMM Do YY')
+                : ''}
+            </p>
           </div>
           <div className="item--row">
             <p>BVN</p>

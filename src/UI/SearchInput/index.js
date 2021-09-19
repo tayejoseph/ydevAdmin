@@ -9,7 +9,7 @@ const SearchInput = ({ height = '2.5rem' }) => {
   }
   return (
     <Container height={height} className="searchInput--container">
-      <form noValid onSubmait={handleSubmit}>
+      <form noValid onSubmit={handleSubmit}>
         <input placeholder="Search" />
         <Button icon aria-label="clear search" className="search--btn">
           <Search stroke="#fff" />

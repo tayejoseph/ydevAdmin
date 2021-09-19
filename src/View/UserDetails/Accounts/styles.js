@@ -18,7 +18,7 @@ export default Styled.div`
         }
     }
     div.col--1, div.col--2 {
-        height: 25rem;
+        min-height: 25rem;
         background: #FFFFFF;
         box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.03);
         border-radius: 5px;
@@ -60,6 +60,8 @@ export default Styled.div`
                 div.card--item {
                     border-radius: 13px;
                     padding: 1em;
+                    width: 100%;
+                    max-width: 18rem;
                     background: rgba(127, 202, 159, 0.1);
                     color: #7FCA9F;
                     svg {

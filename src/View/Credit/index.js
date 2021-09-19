@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route, useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { AppRoute } from '../../constants'
 import { Button } from '../../UI'
 import { UsersPallet } from '../../asset/convertedSvg'
+import { getCredits } from '../../store/action'
 import { SectionHeader, TableContainer } from '../../components'
 import {
   CreditCalulator,
@@ -10,7 +12,7 @@ import {
   CreditOutstanding,
   CreditDue,
 } from '../'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
 import Container from './styles'
 
 const palletItems = [
@@ -20,7 +22,14 @@ const palletItems = [
 ]
 
 const Credit = () => {
+  const dispatch = useDispatch()
   const history = useHistory()
+  const { creditLists } = useSelector((state) => state.adminData)
+
+  useEffect(() => {
+    dispatch(getCredits())
+  }, [dispatch])
+
   return (
     <Switch>
       <Route path={AppRoute.dashboard.credit.due} component={CreditDue} />
@@ -70,7 +79,7 @@ const Credit = () => {
             {...{
               title: 'All Credit',
               columns,
-              dataSource,
+              dataSource: creditLists,
               onRow: (record, rowIndex) => {
                 return {
                   onClick: (event) => {

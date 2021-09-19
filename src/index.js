@@ -9,37 +9,36 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 import 'antd/dist/antd.css'
 import reducers from './store/index'
 import App from './App'
-// import { persistStore, persistReducer } from 'redux-persist'
-// import { PersistGate } from 'redux-persist/integration/react'
-// import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
 import reportWebVitals from './reportWebVitals'
 
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-// }
-// const persistedReducer = persistReducer(persistConfig, reducers)
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+const persistedReducer = persistReducer(persistConfig, reducers)
 
-const store = createStore(
-  // persistedReducer,
-  reducers,
+export const store = createStore(
+  persistedReducer,
   composeWithDevTools(
     applyMiddleware(compose(thunk)),
     // other store enhancers if any
   ),
 )
 
-// const persistor = persistStore(store)
+const persistor = persistStore(store)
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-      {/* </PersistGate> */}
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

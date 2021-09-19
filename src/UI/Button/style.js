@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { lighten } from 'polished'
+import { rgba } from 'polished'
 
 export default styled.button`
   &:disabled {
@@ -7,26 +7,14 @@ export default styled.button`
   }
   cursor: pointer;
   outline: none;
-  position: relative;
-  span.badge--container {
-    position: absolute;
-    background: #e93c3c;
-    border-radius: 50%;
-    padding: 0.25em;
-    font-size: 0.9rem;
-    top: -0.1em;
-    right: -0.1em;
-  }
   ${(props) => css`
-    padding: 0.8em 1.8em;
-    font-size: 0.9rem;
-    border-radius: 4px;
-    font-weight: 500;
+    padding: ${props.small ? '0.5em 0.8em' : '0.9em 1.8em'} ;
     user-select: none;
-    outline: none;
-    background: transparent;
+    font-size: ${props.small ? '0.8rem' : '1rem'};
+    font-weight: 500;
     width: ${props.full ? '100%' : 'fit-content'};
     display: ${props.full ? 'block' : 'inline-block'};
+    border-radius: ${props.rounded ? '100px' : '5px'};
     ${
       props.primary &&
       css`
@@ -35,53 +23,35 @@ export default styled.button`
         color: #fff;
         &:hover,
         &:focus {
-          background: ${({ theme }) => lighten(0.1, theme.primary)};
-          border-color: ${({ theme }) => lighten(0.1, theme.primary)};
+          background: ${({ theme }) => rgba(theme.primary, 0.9)};
+          /* border-color: ${({ theme }) => rgba(theme.primary, 0.9)}; */
+          border: 2px solid ${({ theme }) => rgba(theme.primary, 0.9)};
           color: #fff;
           outline: none;
         }
         &:disabled {
-          background: ${({ theme }) => theme.disabled}!important;
-          border-color: ${({ theme }) => theme.disabled}!important;
+          background: ${({ theme }) => rgba(theme.primary, 0.6)};
+          border: 2px solid ${({ theme }) => rgba(theme.primary, 0.2)};
           color: #fff !important;
-        }
-      `
-    }
-    ${
-      props.outlined &&
-      css`
-        border: 1px solid ${props.theme.primary};
-        background-color: transparent;
-        color: ${props.theme.primary};
-        font-weight: 400;
-        &:hover,
-        &:focus {
-          background-color: ${props.theme.primary};
-          color: #fff;
-          outline: none;
         }
       `
     }
     ${
       props.secondary &&
       css`
-        border: 1px solid ${({ theme }) => theme.tertiary} !important;
-        border-color: #fff;
-        box-shadow: none;
-        background: #fff;
-        box-shadow: none;
-        color: ${props.theme.tertiary};
+        border: 2px solid ${props.theme.secondary};
+        background: ${({ theme }) => theme.secondary};
+        color: #fff;
         &:hover,
         &:focus {
-          background: #fff;
-          border-color: ${({ theme }) =>
-            lighten(0.1, theme.tertiary)}!important;
-          color: ${({ theme }) => lighten(0.1, theme.tertiary)}!important;
-          border: 1px solid ${({ theme }) => theme.tertiary} !important;
+          background: ${({ theme }) => rgba(theme.secondary, 0.8)};
+          border-color: ${({ theme }) => rgba(theme.secondary, 0.8)};
+          color: white;
         }
         &:disabled {
           background: transparent !important;
           color: ${props.theme.disabled}!important;
+          /* border-color: ${props.theme.disabled}!important; */
         }
       `
     }
@@ -90,75 +60,44 @@ export default styled.button`
       css`
         background-color: transparent;
         border-color: transparent;
-        box-shadow: none;
         color: ${({ theme }) => theme.primary};
+        font-weight: bold;
         &:hover,
         &:focus {
-          border-color: transparent !important;
-          background-color: transparent !important;
-          color: ${({ theme }) => theme.primary}!important;
+          color: ${({ theme }) => theme.primary};
+          background: transparent;
+          border-color: transparent;
         }
-      `
-    }
-    ${
-      props.plain &&
-      css`
-        background-color: transparent;
-        border-color: transparent !important;
-        color: ${({ theme }) => theme.tertiary};
-        padding: 0px;
-        box-shadow: none;
-        &:hover,
-        &:focus {
-          color: ${({ theme }) => lighten(0.1, theme.tertiary)}!important;
-          border-color: transparent !important;
-          background-color: transparent !important;
-        }
-      `
-    }
-    ${
-      props.rounded &&
-      css`
-        border-radius: 20px;
       `
     }
     ${
       props.icon &&
       css`
-        padding: 0px;
-        background: transparent;
-        box-shadow: none;
-        color: black;
         border: none;
+        border-color: none;
+        padding: 0px;
+        background-color: transparent;
+        color: ${({ theme }) => theme.primary};
         .icon {
           font-size: 1.2em;
-          margin: 0px;
-          padding: 0px;
         }
         &:hover,
         &:focus {
-          background: transparent;
+          background: none;
           border: none;
+          border-color: none;
+          color: ${({ theme }) => theme.primary};
           outline: none;
-          color: black;
         }
         &:disabled {
-          background: transparent;
+          background: none;
           border: none;
-          color: #fff;
-          outline: none;
+          border-color: none;
+          color: ${({ theme }) => rgba(theme.primary, 0.6)}!important;
         }
       `
     }
-    &.icon--btn__hover {
-        &:hover,
-        &:focus {
-          color: #fff;
-          background-color: ${({ theme }) => lighten(0.1, theme.primary)};
-        }
-    }
 
-       
     /* iconRight */
     ${
       props.iconRight &&
@@ -185,54 +124,44 @@ export default styled.button`
       `
     }
 
-     &.btn--money {
-        padding: 0.2em 0.3em;
-        background: #E2FFEC;
-        .icon {
-            color: #47C479;
-        }
+    `}
+  &.btn--deactivate {
+    background: #ff5e5e;
+    border-color: #ff5e5e;
+    color: #ffff;
+    .icon {
+      color: #ff5e5e;
     }
-    &.btn--edit {
-        padding: 0.2em 0.3em;
-        background: #E2EDFF;
-        border: 1px solid #E2EDFF;
-        .icon {
-            color: #4187FF;
-        }
-    }
-    &.btn--delete {
-        padding: 0.2em 0.3em;
-        background: #FFE9E9;
-        color: #FF5E5E;
-        border: 1px solid #FFE9E9;
-        .icon {
-            color: #FF5E5E;
-        }
-    }
-    &.btn--copy {
-        padding: 0.2em 0.3em;
-        background: #F9F6FB;
-        color: #855AAF;
-        border: 1px solid #F9F6FB;
-        .icon {
-            color: #855AAF;
-        }
-    }
-  /* notification */
-  &.notification--badge {
-    position: relative;
-    &:after {
-      content: "";
-      top: -2px;
-      right: 0%;
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #FF5E5E;
-      border: 1.6px solid #fff;
-
+    &:hover {
+      background: ${rgba('#ff5e5e', 0.9)};
+      border-color: ${rgba('#ff5e5e', 0.9)};
     }
   }
-    `}
+  &.btn--activate {
+    background: #28a745;
+    border-color: #28a745;
+    color: #ffff;
+    .icon {
+      color: #28a745;
+    }
+    &:hover {
+      background: ${rgba('#28a745', 0.9)};
+      border-color: ${rgba('#28a745', 0.9)};
+    }
+  }
+  &.loading--btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ${(props) =>
+      props.spinnerWithTxt
+        ? css`
+            .spinner {
+              margin-right: 0.5em;
+              border: 3.5px solid #f3f3f3;
+              border-top: 3.5px solid ${({ theme }) => theme.primary};
+            }
+          `
+        : ''}
+  }
 `

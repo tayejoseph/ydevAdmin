@@ -19,16 +19,16 @@ const Investors = () => {
   return (
     <Switch>
       <Route
-        path={`${AppRoute.dashboard.investors.initial}/:action`}
-        component={InvestorsAlt}
-      />
-      <Route
         path={`${AppRoute.dashboard.investors.sms}`}
         component={InvestorsSms}
       />
       <Route
         path={`${AppRoute.dashboard.investors.email}`}
         component={InvestorsEmail}
+      />
+      <Route
+        path={`${AppRoute.dashboard.investors.initial}/:action`}
+        component={InvestorsAlt}
       />
       <Route path={AppRoute.dashboard.investors.inital} exact>
         <Container>

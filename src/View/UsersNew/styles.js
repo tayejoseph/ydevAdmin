@@ -1,6 +1,6 @@
 import Styled from 'styled-components'
 import { rgba } from 'polished'
-import { minQuery } from '../../helpers'
+import { minQuery, maxQuery } from '../../helpers'
 
 export default Styled.div`
     padding-bottom: 4em;
@@ -25,6 +25,11 @@ export default Styled.div`
                 ${minQuery('lg')} {
                     grid-template-columns: 1fr 1fr;
                     grid-gap: 4em;
+                }
+            }
+            div.upload--row {
+                ${maxQuery('lg')} {
+                    grid-gap: 1.6em;
                 }
             }
         }
