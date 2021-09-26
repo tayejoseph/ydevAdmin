@@ -5,7 +5,7 @@ import { store } from '../'
 import { message } from 'antd'
 
 const server = axios.create({
-  baseURL: 'https://tiger.traki.ng',
+  baseURL: '',
   headers: { 'Content-Type': 'application/json' },
 })
 
@@ -20,15 +20,15 @@ server.interceptors.response.use(
     return response
   },
   (err) => {
-    if (err.response.status === 401) {
-      Cookies.remove('token')
-      message.warning('Your Session has Expired kindly Login again')
-      setTimeout(() => {
-        store.dispatch(logOutHander())
-      }, 500)
-    } else {
-      return Promise.reject(err)
-    }
+    // if (err.response.status === 403) {
+    //   Cookies.remove('token')
+    //   message.warning('Your Session has Expired kindly Login again')
+    //   setTimeout(() => {
+    //     store.dispatch(logOutHander())
+    //   }, 500)
+    // } else {
+    //   return Promise.reject(err)
+    // }
     // NProgress.done()
   },
 )

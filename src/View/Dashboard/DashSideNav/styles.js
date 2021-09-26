@@ -5,12 +5,13 @@ export default Styled.div`
     header {
         display: flex;
         align-items: center;
-        justify-content: center;
+        padding-left: 3em;
+        /* justify-content: center; */
         border-bottom: 0.05px solid #FFFFFF;
         height: ${({ theme }) => theme.dimensions.navHeight};
         svg {
-            font-size: 10rem;
-            height: 2rem;
+            font-size: 4rem;
+            /* height: 2rem; */
         }
     }
     nav {

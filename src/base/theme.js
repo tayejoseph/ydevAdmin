@@ -22,7 +22,7 @@ export const BREAKPOINTS = {
 }
 
 const theme = () => ({
-  primary: '#1565E8',
+  primary: '#051A26',
   bgColor: '#F4F8FE',
   tertiary: 'pink',
   colors,

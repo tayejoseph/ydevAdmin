@@ -10,6 +10,12 @@ const AppRoute = {
   },
   dashboard: {
     initial: initialDashRoute,
+    enterprise: `${initialDashRoute}/enterprise`,
+    schools: `${initialDashRoute}/schools`,
+    events: `${initialDashRoute}/events`,
+    payments: `${initialDashRoute}/payments`,
+
+
     users: {
       initial: `${initialDashRoute}/users`,
       view: `${initialDashRoute}/users`,

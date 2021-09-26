@@ -2,9 +2,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Container from './styles'
 
-const SectionHeader = ({ links = [], title, leftSection }) => {
+const SectionHeader = ({ links = [], children, title, leftSection }) => {
   return (
-    <Container>
+    <Container className = "section--header">
       <div className="col--1">
         <nav>
           {links.map((item, index) => (
@@ -14,7 +14,10 @@ const SectionHeader = ({ links = [], title, leftSection }) => {
             </React.Fragment>
           ))}
         </nav>
+        <div className = "bottom--nav">
         <h1>{title}</h1>
+        {children}
+        </div>
       </div>
       <div className="col--2">{leftSection}</div>
     </Container>

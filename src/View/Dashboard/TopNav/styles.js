@@ -43,9 +43,7 @@ export default Styled.div`
                 margin-right: 1.5em;
                 .icon {
                     font-size: 1.5rem;
-                    color: #021F4F;
-                    /* stroke-width: 0;
-                    stroke: #021F4F; */
+                    color: ${({ theme }) => theme.primary};
                 }
             }
             &.profile--btn {
@@ -56,17 +54,17 @@ export default Styled.div`
                 grid-gap: 0.5em;
                 align-items: center;
                 font-size: 0.9rem;
-                color: #021F4F;
+                color: ${({ theme }) => theme.primary};
                 span.img--container {
                     display: inline-block;
-                    background: blue;
+                    background: ${({ theme }) => theme.primary};
                     height: 2rem;
                     margin-right: 0.5em;
                     width: 2rem;
                     border-radius: 50%;
                 }
                 .icon {
-                    color: #1565E8;
+                    color: ${({ theme }) => theme.primary};
                     transition: all 0.5s;
                     font-size: 1rem;
                     stroke-width: 10px;

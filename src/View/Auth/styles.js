@@ -21,11 +21,8 @@ export default Styled.div`
         background: ${({ theme }) => theme.primary};
         header {
             position: absolute;
-            top: 0em;
-            left: 2em;
-            svg {
-                font-size: 10rem;
-            }
+            top: 2em;
+            left: 3em;
         }
         div.content--container {
             svg {

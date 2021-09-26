@@ -15,6 +15,7 @@ export default Styled.div`
             font-weight: 400;
             width: 50%;
             max-width: 10rem;
+            text-transform: uppercase;
             font-size: 0.85rem;
         }
         .icon {

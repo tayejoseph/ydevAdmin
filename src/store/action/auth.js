@@ -34,22 +34,22 @@ export const getUserDetails = (data) => async (dispatch, getState) => {
 
 export const handleSignIn = (data) => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.post(
-      '/api/v1/auth/auth',
-      data,
-    )
+    // const { status, data: response, ...rest } = await axios.post(
+    //   '/api/v1/auth/auth',
+    //   data,
+    // )
 
-    if (status === 200) {
-      axios.defaults.headers.common.Authorization = `Bearer ${response.token}`
-      await dispatch(getUserDetails())
-      await dispatch(getRoles())
-      message.success(response.details)
-      Promise.all([
-        dispatch(getUsers(), dispatch(getPlans()), dispatch(getCredits())),
-      ])
+    // if (status === 200) {
+    //   axios.defaults.headers.common.Authorization = `Bearer ${response.token}`
+    //   await dispatch(getUserDetails())
+    //   await dispatch(getRoles())
+    //   message.success(response.details)
+    //   Promise.all([
+    //     dispatch(getUsers(), dispatch(getPlans()), dispatch(getCredits())),
+    //   ])
       dispatch(altAuthState(true))
-    } else {
-    }
+    // } else {
+    // }
   } catch ({ response }) {
     handleError(response)
   }

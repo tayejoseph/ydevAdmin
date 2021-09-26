@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { useHistory, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { formValidator } from '../../helpers'
-import { AuthIllustration, AppLogo } from '../../asset/convertedSvg'
+import { ydevIllustration } from '../../asset/png'
 import { handleSignIn } from '../../store/action'
 import { AppRoute } from '../../constants'
+import { YdevIllustration } from '../../components'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 import Container from './styles'
@@ -16,8 +17,6 @@ const Auth = () => {
     email: '',
     password: '',
   })
-
-  const history = useHistory()
 
   const handleInput = ({ target: { value, name } }) => {
     setFormState((s) => ({
@@ -44,10 +43,10 @@ const Auth = () => {
     <Container>
       <div className="col--1">
         <header>
-          <AppLogo />
+          <YdevIllustration />
         </header>
         <div className="content--container">
-          <AuthIllustration />
+          <img src={ydevIllustration} alt="Ydev" />
         </div>
       </div>
 

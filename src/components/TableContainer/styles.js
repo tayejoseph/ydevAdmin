@@ -102,4 +102,11 @@ export default Styled.div`
         font-size: 0.8rem;
         padding: 0.5em;
     }
+    .badge--failed {
+        background: rgba(255, 0, 0, 0.1);
+        border-radius: 2px;
+        color: #FF0000;
+        font-size: 0.8rem;
+        padding: 0.5em;
+    }
 `

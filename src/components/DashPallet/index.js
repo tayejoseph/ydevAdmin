@@ -51,10 +51,10 @@ const DashPallet = ({ title, icon, value, Icon }) => {
   return (
     <Container>
       <div>
-        <p>TOTAL BORROWERS</p>
+        <p>{title}</p>
         {Icon}
       </div>
-      <h1>5.5k</h1>
+      <h1>{value}</h1>
       <div className="last--content">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart width={500} height={300} data={data}>

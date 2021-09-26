@@ -1,17 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Route, Switch, useLocation } from 'react-router-dom'
-import {
-  DashHome,
-  Users,
-  Borrowers,
-  Settings,
-  Credit,
-  Repayment,
-  Investors,
-  Reports,
-  Plans,
-} from '../'
+import { DashHome, Payments, Enterprise, Events, Schools } from '../'
 import { AppRoute, dashboardConstant } from '../../constants'
 import { getRoles } from '../../store/action'
 import TopNav from './TopNav'
@@ -61,32 +51,10 @@ const Dashboard = () => {
               exact
               component={DashHome}
             />
-            <Route path={AppRoute.dashboard.users.initial} component={Users} />
-            <Route
-              path={AppRoute.dashboard.borrowers.initial}
-              component={Borrowers}
-            />
-            <Route
-              path={AppRoute.dashboard.credit.initial}
-              component={Credit}
-            />
-            <Route
-              path={AppRoute.dashboard.repayment.initial}
-              component={Repayment}
-            />
-            <Route
-              path={AppRoute.dashboard.reports.initial}
-              component={Reports}
-            />
-            <Route
-              path={AppRoute.dashboard.investors.initial}
-              component={Investors}
-            />
-            <Route
-              path={AppRoute.dashboard.settings.initial}
-              component={Settings}
-            />
-            <Route path={AppRoute.dashboard.plans.initial} component={Plans} />
+            <Route path={AppRoute.dashboard.schools} component={Schools} />
+            <Route path={AppRoute.dashboard.events} component={Events} />
+            <Route path={AppRoute.dashboard.payments} component={Payments} />
+            <Route path={AppRoute.dashboard.enterpise} component={Enterprise} />
           </Switch>
         </div>
       </main>

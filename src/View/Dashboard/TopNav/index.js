@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { IoIosArrowDown, IoMdLogOut } from 'react-icons/io'
 import { HiMenuAlt2 } from 'react-icons/hi'
 import { logOutHander } from '../../../store/action'
-import { FiBell } from 'react-icons/fi'
+// import { FiBell } from 'react-icons/fi'
 import { SearchInput, Button } from '../../../UI'
 import Container from './styles'
 
@@ -25,9 +25,9 @@ const TopNav = ({ handleToggleMenu, showNav }) => {
         <SearchInput />
       </div>
       <div className="action--tray">
-        <Button icon className="nofication--btn">
+        {/* <Button icon className="nofication--btn">
           <FiBell />
-        </Button>
+        </Button> */}
         <button
           className={`profile--btn ${showPopup ? 'show--popup' : ''}`}
           onClick={() => setDisplay(!showPopup)}
