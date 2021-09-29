@@ -1,54 +1,36 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Modal, InputGroup, Button } from '../../../UI'
 import { useHistory } from 'react-router-dom'
 import Container from './styles'
 
-const AltEvents = () => {
-  const [formData, setFormData] = useState({})
-  const history = useHistory()
-  const handleInput = ({ target: { value, name } }) => {
-    setFormData((s) => ({
-      ...s,
-      [name]: value,
-    }))
-  }
+const AllEvents = ({ handleHideModal }) => {
+  const handleInput = ({ target: { value, name } }) => {}
+  const handleSubmit = () => {}
   return (
     <Container>
       <Modal
-        modalTitle="Add Event"
-        modalFooter={
-          <Button full type="submit" form={'event--form'}>
-            Save
-          </Button>
-        }
+        modalTitle={'Add Event'}
+        showModal={true}
+        onClose={handleHideModal}
+        modalFooter={<Button full>Submit</Button>}
       >
         <form
-          id="event--form"
-          name="event--form"
           onSubmit={(e) => {
             e.preventDefault()
+            handleSubmit()
           }}
         >
+          <InputGroup label="Event Name" onChange={handleInput} />
+          <InputGroup type="date" label="Event Date" />
           <InputGroup
-            name="eventName"
+            label="Event Description"
+            type="textarea"
             onChange={handleInput}
-            value={formData.eventName}
-            label="Event Name"
           />
-          <InputGroup
-            name="eventName"
-            type="date"
-            onChange={handleInput}
-            label="Event Name"
-          />
-          <InputGroup>
-            <label>Event Description</label>
-            <textarea />
-          </InputGroup>
         </form>
       </Modal>
     </Container>
   )
 }
 
-export default AltEvents
+export default AllEvents

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Tabs } from 'antd'
 import { useQuery } from '../../hooks'
 import { Button } from '../../UI'
 import { SectionHeader } from '../../components'
-import AltEvents from './AllEvents'
+import AltEvents from './AltEvents'
 import AllEvents from './AllEvents'
 import UpcomingEvents from './UpcomingEvents'
 import PastEvents from './PastEvents'
@@ -13,13 +13,19 @@ import Container from './styles'
 const { TabPane } = Tabs
 
 const Events = () => {
-  const modal = useQuery().get('modal')
+  const [showModal, setDisplay] = useState(false)
   const activeTab = useQuery().get('tab')
   const history = useHistory()
 
   return (
     <>
-      {modal && <AltEvents />}
+      {showModal && (
+        <AltEvents
+          handleHideModal={() => {
+            setDisplay(false)
+          }}
+        />
+      )}
       <Container>
         <SectionHeader
           title="Events"
@@ -27,7 +33,7 @@ const Events = () => {
             <Button
               rounded
               onClick={() => {
-                history.push(`?tab=${activeTab}&modal=add`)
+                setDisplay(true)
               }}
             >
               Add Event

@@ -5,7 +5,7 @@ import { TableContainer } from '../../../components'
 import { columns, dataSource } from './tableData'
 import Container from './styles'
 
-const AllEvents = () => {
+const AltEvents = () => {
   const history = useHistory()
   return (
     <Container>
@@ -29,4 +29,4 @@ const AllEvents = () => {
   )
 }
 
-export default AllEvents
+export default AltEvents

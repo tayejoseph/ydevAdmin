@@ -33,7 +33,8 @@ const TopNav = ({ handleToggleMenu, showNav }) => {
           onClick={() => setDisplay(!showPopup)}
         >
           <span className="img--container" />
-          {userDetails?.sname} {userDetails?.fname}
+          Ydev Admin
+          {/* {userDetails?.sname} {userDetails?.fname} */}
           <IoIosArrowDown />
         </button>
         {showPopup && (
