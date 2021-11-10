@@ -22,29 +22,47 @@ const DashSideNav = () => {
           <Home />
           <span>Dashboard</span>
         </NavLink>
-        <NavLink
-          className={`menu`}
-          to={`${AppRoute.dashboard.enterprise}?tab=corperateTraining`}
-        >
-          <Repayments />
-          <span>Enterprise</span>
-        </NavLink>
-        <NavLink className={`menu`} to={AppRoute.dashboard.schools}>
+        <NavLink className={`menu`} to={AppRoute.dashboard.schools.initial}>
           <Users />
           <span>Schools</span>
         </NavLink>
-        <NavLink
-          className="menu"
-          to={`${AppRoute.dashboard.events}?tab=AllEvents`}
-        >
+        <NavLink className="menu" to={AppRoute.dashboard.events.initial}>
           <Settings />
           <span>Events</span>
         </NavLink>
         <hr />
-        <NavLink className="menu" to={AppRoute.dashboard.payments}>
+        <NavLink className="menu" to={AppRoute.dashboard.alumini.initial}>
+          <Settings />
+          <span>Hire Alumini</span>
+        </NavLink>
+        <NavLink className="menu" to={AppRoute.dashboard.higherEd.initial}>
+          <Settings />
+          <span>Higher Ed</span>
+        </NavLink>
+        <NavLink
+          className="menu"
+          to={AppRoute.dashboard.cooperateTraining.initial}
+        >
+          <Settings />
+          <span>Cooperate Training</span>
+        </NavLink>
+        <hr />
+        <NavLink className="menu" to={AppRoute.dashboard.jobs.initial}>
+          <Settings />
+          <span>Jobs</span>
+        </NavLink>
+        <NavLink className="menu" to={AppRoute.dashboard.mentors.initial}>
+          <Settings />
+          <span>Mentors</span>
+        </NavLink>
+        <NavLink className="menu" to={AppRoute.dashboard.getInTouch.initial}>
+          <Settings />
+          <span>Contacts</span>
+        </NavLink>
+        {/* <NavLink className="menu" to={AppRoute.dashboard.payments}>
           <Loans />
           <span>Payments</span>
-        </NavLink>
+        </NavLink> */}
       </nav>
     </Container>
   )

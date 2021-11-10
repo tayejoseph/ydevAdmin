@@ -4,37 +4,71 @@ export const isEmail = (email) => {
   )
 }
 
+export const isUrl = (url) => {
+  return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(
+    url,
+  )
+}
+
 const formValidator = (inputs) => {
   let validated = true
   Array.from(inputs).map((input) => {
     const { type, value, required } = input
-    const errorClass = input.getAttribute('data-error')
+    const inputId = input.getAttribute('data-errorid')
+    const errorDom = inputId ? document.getElementById(inputId) : null
+    const isPassword = input.getAttribute('data-type')
+
     const name = input.getAttribute('data-label')
       ? input.getAttribute('data-label')
       : input.name
-    const errorItem = document.getElementsByClassName(errorClass)[0]
-    if (required) {
+    if (required && !isPassword && errorDom) {
       if (value) {
-        errorItem.innerHTML = ''
+        errorDom.innerHTML = ''
       } else {
         validated = false
-        errorItem.innerHTML = `${name} cannot be blank`
+        errorDom.innerHTML = `${name} cannot be blank`
       }
     }
 
-    if (type === 'email') {
+    if (type === 'email' && errorDom) {
       if (isEmail(value)) {
-        errorItem.innerHTML = ''
+        errorDom.innerHTML = ''
       } else {
         validated = false
-        errorItem.innerHTML = 'Invalid Email Address'
+        errorDom.innerHTML = 'Invalid Email Address'
       }
     }
 
-    if (type === 'password') {
+    if (type === 'url' && errorDom) {
+      if (isUrl(value)) {
+        errorDom.innerHTML = ''
+      } else {
+        validated = false
+        errorDom.innerHTML = 'Invalid Url'
+      }
+    }
+
+    // if (type === 'file') {
+    //   if (!value && required) {
+    //     errorDom.innerHTML = ''
+    //   } else {
+    //     validated = false
+    //     errorDom.innerHTML = `${name} are required`
+    //   }
+    // }
+
+    if ((type === 'password' || isPassword) && errorDom) {
       if (value) {
-        errorItem.innerHTML = ''
-      } else errorItem.innerHTML = `Password cannot be blank`
+        if (value.length < 5) {
+          validated = false
+          errorDom.innerHTML = `Your password must be greater than 5 characters`
+        } else {
+          errorDom.innerHTML = ''
+        }
+      } else {
+        validated = false
+        errorDom.innerHTML = `Password cannot be blank`
+      }
     }
 
     return input
@@ -43,56 +77,3 @@ const formValidator = (inputs) => {
 }
 
 export default formValidator
-
-// export const isEmail = (email) => {
-//   return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-//     email,
-//   )
-// }
-
-// const formValidator = (inputs) => {
-//   let validated = true
-//   Array.from(inputs).map((input) => {
-//     const { type, value, required } = input
-//     const name = input.getAttribute('data-label')
-//       ? input.getAttribute('data-label')
-//       : input.name
-//     if (required) {
-//       if (value) {
-//         input.parentElement.getElementsByClassName('error-msg')[0].innerHTML =
-//           ''
-//       } else {
-//         validated = false
-//         input.parentElement.getElementsByClassName(
-//           'error-msg',
-//         )[0].innerHTML = `${name} cannot be blank`
-//       }
-//     }
-
-//     if (type === 'email') {
-//       if (isEmail(value)) {
-//         input.parentElement.getElementsByClassName('error-msg')[0].innerHTML =
-//           ''
-//       } else {
-//         validated = false
-//         input.parentElement.getElementsByClassName('error-msg')[0].innerHTML =
-//           'Invalid Email Address'
-//       }
-//     }
-
-//     if (type === 'password') {
-//       if (value) {
-//         input.parentElement.getElementsByClassName('error-msg')[0].innerHTML =
-//           ''
-//       } else
-//         input.parentElement.getElementsByClassName(
-//           'error-msg',
-//         )[0].innerHTML = `Password cannot be blank`
-//     }
-
-//     return input
-//   })
-//   return validated
-// }
-
-// export default formValidator

@@ -12,6 +12,10 @@ const dimensions = {
 
 const colors = {
   darkBlue: '#053161',
+  dangerDark: '#FF5E5E',
+  dangerLight: '#FFE9E9',
+  danger: '#E93C3C',
+  green: '#1AB759',
 }
 
 export const BREAKPOINTS = {
@@ -23,13 +27,13 @@ export const BREAKPOINTS = {
 
 const theme = () => ({
   primary: '#051A26',
+  secondary: '#3A8DBC',
   bgColor: '#F4F8FE',
   tertiary: 'pink',
   colors,
   mixins,
   dimensions,
   fontFamily: 'Livvic',
-  secondary: '#BA390C',
 })
 
 export default theme

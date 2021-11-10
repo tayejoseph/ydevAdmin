@@ -1,22 +1,26 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { Route, Switch, useLocation } from 'react-router-dom'
-import { DashHome, Payments, Enterprise, Events, Schools } from '../'
+import {
+  DashHome,
+  Payments,
+  Alumini,
+  Mentors,
+  Events,
+  Schools,
+  GetInTouch,
+  Jobs,
+  HigherEd,
+  CooperateTraining,
+} from '../'
 import { AppRoute, dashboardConstant } from '../../constants'
-import { getRoles } from '../../store/action'
 import TopNav from './TopNav'
 import DashSideNav from './DashSideNav'
 import Container from './styles'
 
 const Dashboard = () => {
   const [showNav, setDisplay] = useState(false)
-  const dispatch = useDispatch()
   const contentContainerRef = useRef(null)
   const { pathname } = useLocation()
-
-  useEffect(() => {
-    dispatch(getRoles())
-  }, [dispatch])
 
   useEffect(() => {
     contentContainerRef.current.scrollTo({
@@ -51,10 +55,37 @@ const Dashboard = () => {
               exact
               component={DashHome}
             />
-            <Route path={AppRoute.dashboard.schools} component={Schools} />
-            <Route path={AppRoute.dashboard.events} component={Events} />
+            <Route
+              path={AppRoute.dashboard.schools.initial}
+              component={Schools}
+            />
+            <Route
+              path={AppRoute.dashboard.events.initial}
+              component={Events}
+            />
             <Route path={AppRoute.dashboard.payments} component={Payments} />
-            <Route path={AppRoute.dashboard.enterpise} component={Enterprise} />
+            {/* <Route path={AppRoute.dashboard.enterpise} component={Enterprise} /> */}
+            <Route path={AppRoute.dashboard.jobs.initial} component={Jobs} />
+            <Route
+              path={AppRoute.dashboard.mentors.initial}
+              component={Mentors}
+            />
+            <Route
+              path={AppRoute.dashboard.higherEd.initial}
+              component={HigherEd}
+            />
+            <Route
+              path={AppRoute.dashboard.alumini.initial}
+              component={Alumini}
+            />
+            <Route
+              path={AppRoute.dashboard.getInTouch.initial}
+              component={GetInTouch}
+            />
+            <Route
+              path={AppRoute.dashboard.cooperateTraining.initial}
+              component={CooperateTraining}
+            />
           </Switch>
         </div>
       </main>

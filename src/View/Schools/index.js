@@ -1,36 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Switch, Route, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppRoute, schoolListMenu } from '../../constants'
 import { InputGroup } from '../../UI'
+import { getPrograms } from '../../store/action'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
 import Container from './styles'
 
-const palletItems = [
-  { title: 'Total Response', value: '5.5k' },
-  { title: 'All Earnings', value: '2.5k' },
-  { title: 'Total Follow Up', value: '40' },
-]
-
+const palletItems = [{ title: 'Total Applications', value: '5.5k' }]
 
 const Schools = () => {
+  const [activeSchool, setActiveSchool] = useState('design_school')
+  const { programLists } = useSelector((s) => s.AppReducer)
+  const dispatch = useDispatch()
   const history = useHistory()
+
+  const activeSchoolData = programLists
+    ? programLists.filter((item) => item.program !== activeSchool)
+    : []
+
+  useEffect(() => {
+    dispatch(getPrograms())
+  }, [dispatch])
+
   return (
     <Switch>
-      <Route path={AppRoute.dashboard.repayment.inital} exact>
+      <Route path={AppRoute.dashboard.schools.inital} exact>
         <Container>
           <SectionHeader
             title="ActiveSchool"
             links={[]}
             children={
-              <InputGroup>
-              <select>
-              {schoolListMenu.map((item) => (
-                <option value = {item.title} key = {item.title}>{item.title}</option>
-              ))}
-              </select>
-              </InputGroup>
+              <InputGroup
+                type="select"
+                onChange={({ target: { value } }) => {
+                  setActiveSchool(value)
+                }}
+                optionLists={
+                  <>
+                    {schoolListMenu.map((item) => (
+                      <option value={item.value} key={item.title}>
+                        {item.title}
+                      </option>
+                    ))}
+                  </>
+                }
+              />
             }
           />
           <div className="pallet--grid__container">
@@ -49,9 +66,12 @@ const Schools = () => {
 
           <TableContainer
             {...{
-              title: 'All Repayments',
+              title: `${
+                schoolListMenu.find((item) => item.value === activeSchool).title
+              } Applicants`,
               columns,
-              dataSource,
+              loading: programLists === '',
+              dataSource: activeSchoolData,
               onRow: (record, rowIndex) => {
                 return {
                   onClick: (event) => {

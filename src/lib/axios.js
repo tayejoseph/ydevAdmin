@@ -5,7 +5,7 @@ import { store } from '../'
 import { message } from 'antd'
 
 const server = axios.create({
-  baseURL: '',
+  baseURL: 'https://ydev-api.herokuapp.com/api',
   headers: { 'Content-Type': 'application/json' },
 })
 

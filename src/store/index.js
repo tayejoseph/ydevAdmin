@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import UserReducer from './reducers/user'
-import AdminReducer from './reducers/admin'
+import AppReducer from './reducers/app'
+import AuthReducer from './reducers/auth'
 
 const rootReducer = combineReducers({
-  userData: UserReducer,
-  adminData: AdminReducer,
+  AppReducer: AppReducer,
+  AuthReducer: AuthReducer,
 })
 
 export default rootReducer

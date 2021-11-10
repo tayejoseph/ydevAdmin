@@ -10,7 +10,7 @@ import Container from './styles'
 const TopNav = ({ handleToggleMenu, showNav }) => {
   const [showPopup, setDisplay] = useState(false)
   const dispatch = useDispatch()
-  const { userDetails } = useSelector((state) => state.userData)
+  const { userDetails } = useSelector((state) => state.AppReducer)
   return (
     <Container>
       <div className="col--1">

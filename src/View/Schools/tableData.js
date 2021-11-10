@@ -1,10 +1,8 @@
-import { v4 as uuid } from 'uuid'
-
 export const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Full Name',
+    dataIndex: 'full_name',
+    key: 'full_name',
   },
   {
     title: 'Email',
@@ -12,14 +10,8 @@ export const columns = [
     key: 'email',
   },
   {
-    title: 'Contact Info',
-    dataIndex: 'phone',
-    key: 'phone',
+    title: 'Phone Number',
+    dataIndex: 'phone_number',
+    key: 'phone_number',
   },
 ]
-export const dataSource = [...Array(10).keys()].map((item, index) => ({
-  key: uuid(),
-  name: 'John Doe',
-  email: 'JohnDoe@gmail.com',
-  phone: '07012345675',
-}))

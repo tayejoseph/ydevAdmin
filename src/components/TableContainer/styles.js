@@ -82,6 +82,7 @@ export default Styled.div`
 
     div.action--container {
         display: flex;
+        justify-content: center;
         grid-gap: 1em;
         svg {
             font-size: 1.2rem;

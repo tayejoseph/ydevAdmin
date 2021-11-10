@@ -19,7 +19,7 @@ const ScrollToTop = () => {
 
 const App = () => {
   const location = useLocation()
-  const { authenticated } = useSelector((state) => state.userData)
+  const { authenticated } = useSelector((state) => state.AuthReducer)
   let background = location.state && location.state.background
 
   return (
@@ -27,7 +27,8 @@ const App = () => {
       <GlobalStyle />
       <IconContext.Provider value={{ className: 'icon' }}>
         <div className="app--content">
-          <Switch location={background || location}>
+          <Dashboard />
+          {/* <Switch location={background || location}>
             <Route path="/" exact>
               <Redirect to={AppRoute.auth.signIn} />
             </Route>
@@ -45,7 +46,7 @@ const App = () => {
                 <Redirect to={AppRoute.auth.signIn} />
               )}
             </Route>
-          </Switch>
+          </Switch> */}
         </div>
         <ScrollToTop />
       </IconContext.Provider>

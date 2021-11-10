@@ -1,0 +1,40 @@
+// Jobs
+import { message } from 'antd'
+import { axios, handleError } from '../../lib'
+import types from '../types'
+
+const altEvents = (data) => ({
+  type: types.altEvents,
+  data,
+})
+
+export const getEvents = () => async (dispatch, getState) => {
+  try {
+    const { status, data: response } = await axios.get('Eventship')
+    if (status === 200) {
+      dispatch(altEvents(response))
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const alterEvents = ({ id, ...data }, action) => async (
+  dispatch,
+  getState,
+) => {
+  try {
+    const { status } =
+      action === 'delete'
+        ? await axios.delete(`Eventship/${id}`)
+        : await axios.put(`Eventship/${id}`, { id, ...data })
+    if (status === 200) {
+      message.success(
+        `Sucessfull ${action === 'delete' ? 'deleted' : 'updated'} contact`,
+      )
+      await dispatch(getEvents())
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}

@@ -1,20 +1,19 @@
 import { message } from 'antd'
 import { handleError, axios } from '../../lib'
-import { userTypes } from '../types'
-import { getUsers, getRoles, getPlans, getCredits } from '../action'
+import TYPES from '../types'
 
 export const altAuthState = (data) => ({
-  type: userTypes.altAuthState,
+  type: TYPES.altAuthState,
   data,
 })
 
 export const altUserDetails = (data) => ({
-  type: userTypes.altUserDetails,
+  type: TYPES.altUserDetails,
   data,
 })
 
 export const logOutHander = () => ({
-  type: userTypes.clearState,
+  type: TYPES.clearState,
 })
 
 export const getUserDetails = (data) => async (dispatch, getState) => {
@@ -47,7 +46,7 @@ export const handleSignIn = (data) => async (dispatch, getState) => {
     //   Promise.all([
     //     dispatch(getUsers(), dispatch(getPlans()), dispatch(getCredits())),
     //   ])
-      dispatch(altAuthState(true))
+    dispatch(altAuthState(true))
     // } else {
     // }
   } catch ({ response }) {
