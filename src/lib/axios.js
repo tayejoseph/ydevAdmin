@@ -5,7 +5,7 @@ import { store } from '../'
 import { message } from 'antd'
 
 const server = axios.create({
-  baseURL: 'https://ydev-api.herokuapp.com/api',
+  baseURL: 'https://secret-oasis-97701.herokuapp.com/api',
   headers: { 'Content-Type': 'application/json' },
 })
 
@@ -20,16 +20,15 @@ server.interceptors.response.use(
     return response
   },
   (err) => {
-    // if (err.response.status === 403) {
-    //   Cookies.remove('token')
-    //   message.warning('Your Session has Expired kindly Login again')
-    //   setTimeout(() => {
-    //     store.dispatch(logOutHander())
-    //   }, 500)
-    // } else {
-    //   return Promise.reject(err)
-    // }
-    // NProgress.done()
+    if (err.response.status === 403) {
+      Cookies.remove('token')
+      message.warning('Your Session has Expired kindly Login again')
+      setTimeout(() => {
+        store.dispatch(logOutHander())
+      }, 500)
+    } else {
+      return Promise.reject(err)
+    }
   },
 )
 

@@ -8,12 +8,19 @@ const initState = {
   creditLists: '',
   missedRepaymentLists: '',
   principalOutstandingLists: '',
-  authenticated: true,
+  authenticated: false,
 }
 
-const UserReducer = (state = initState, action) => {
+const AuthReducer = (state = initState, action) => {
   const { type, data } = action
   switch (type) {
+    case TYPES.clearState:
+      return initState
+    case TYPES.altAuthState:
+      return {
+        ...state,
+        authenticated: data,
+      }
     case TYPES.altPrincipalOutstanding:
       return {
         ...state,
@@ -54,4 +61,4 @@ const UserReducer = (state = initState, action) => {
   }
 }
 
-export default UserReducer
+export default AuthReducer

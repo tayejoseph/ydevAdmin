@@ -3,17 +3,17 @@ import { axios, handleError } from '../../lib'
 import types from '../types'
 import { message } from 'antd'
 
-const altAlumini = (data) => ({
-  type: types.altAlumini,
+const altCooperateTraining = (data) => ({
+  type: types.altCooperateTraining,
   data,
 })
 
-export const getHireAlumini = () => async (dispatch, getState) => {
+export const getCooperationTraining = () => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.get('alumini')
+    const { status, data: response, ...rest } = await axios.get('training')
     console.log({ status, response, ...rest }, 'sdljksdskdj')
     if (status === 200) {
-      dispatch(altAlumini(response))
+      dispatch(altCooperateTraining(response))
     }
     console.log(response, 'Job response')
   } catch ({ response }) {
@@ -21,21 +21,21 @@ export const getHireAlumini = () => async (dispatch, getState) => {
   }
 }
 
-export const alterHireAlumini = ({ id, ...data }, action) => async (
+export const alterCooperateTraining = ({ id, ...data }, action) => async (
   dispatch,
   getState,
 ) => {
   try {
     const { status, data: response } =
       action === 'delete'
-        ? await axios.delete(`alumini/${id}`)
-        : await axios.put(`alumini/${id}`, { id, ...data })
+        ? await axios.delete(`training/${id}`)
+        : await axios.put(`training/${id}`, { id, ...data })
 
     if (status === 200) {
       message.success(
-        `Sucessfull ${action === 'delete' ? 'deleted' : 'updated'} Alumini`,
+        `Sucessfull ${action === 'delete' ? 'deleted' : 'updated'} training`,
       )
-      await dispatch(getHireAlumini())
+      await dispatch(getCooperationTraining())
     }
     console.log(response, 'Sdjskdskj')
   } catch ({ response }) {

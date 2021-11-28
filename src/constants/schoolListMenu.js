@@ -1,4 +1,5 @@
 const schoolListMenu = [
+  { title: 'All', value: 'all' },
   { title: 'Design School', value: 'design_school' },
   { title: 'Software School', value: 'software_school' },
   { title: 'Data School', value: 'data_school' },

@@ -9,12 +9,10 @@ const altPrograms = (data) => ({
 
 export const getPrograms = () => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.get('program')
-    console.log({ status, response, ...rest }, 'sdljksdskdj')
+    const { status, data: response } = await axios.get('program')
     if (status === 200) {
       dispatch(altPrograms(response))
     }
-    console.log(response, 'Job response')
   } catch ({ response }) {
     handleError(response)
   }

@@ -9,16 +9,18 @@ import { SectionHeader, TableContainer } from '../../components'
 import { columns } from './tableData'
 import Container from './styles'
 
-const palletItems = [{ title: 'Total Applications', value: '5.5k' }]
-
 const Schools = () => {
-  const [activeSchool, setActiveSchool] = useState('design_school')
+  const [activeSchool, setActiveSchool] = useState('all-All')
   const { programLists } = useSelector((s) => s.AppReducer)
   const dispatch = useDispatch()
   const history = useHistory()
 
+  const palletItems = [
+    { title: 'Total Applications', value: programLists.length },
+  ]
+
   const activeSchoolData = programLists
-    ? programLists.filter((item) => item.program !== activeSchool)
+    ? programLists.filter((item) => item.program === activeSchool.split('-')[0])
     : []
 
   useEffect(() => {
@@ -41,7 +43,10 @@ const Schools = () => {
                 optionLists={
                   <>
                     {schoolListMenu.map((item) => (
-                      <option value={item.value} key={item.title}>
+                      <option
+                        value={`${item.value}-${item.title}`}
+                        key={item.title}
+                      >
                         {item.title}
                       </option>
                     ))}
@@ -51,7 +56,16 @@ const Schools = () => {
             }
           />
           <div className="pallet--grid__container">
-            {palletItems.map((item) => (
+            {(activeSchool !== 'all-All'
+              ? [
+                  ...palletItems,
+                  {
+                    title: `Total ${activeSchool.split('-')[1]} Applicants `,
+                    value: activeSchoolData.length,
+                  },
+                ]
+              : palletItems
+            ).map((item) => (
               <div className="pallet--item">
                 <h1>{item.value}</h1>
                 <div>
@@ -66,12 +80,11 @@ const Schools = () => {
 
           <TableContainer
             {...{
-              title: `${
-                schoolListMenu.find((item) => item.value === activeSchool).title
-              } Applicants`,
+              title: `${activeSchool.split('-')[1]} Applicants`,
               columns,
               loading: programLists === '',
-              dataSource: activeSchoolData,
+              dataSource:
+                activeSchool === 'all-All' ? programLists : activeSchoolData,
               onRow: (record, rowIndex) => {
                 return {
                   onClick: (event) => {

@@ -7,7 +7,7 @@ import { AppRoute } from '../../constants'
 import EventsAlt from '../EventsAlt'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
 import Container from './styles'
 
 const Events = () => {
@@ -29,7 +29,7 @@ const Events = () => {
   return (
     <Switch>
       <Route
-        path={`${AppRoute.dashboard.events.initial}/:id`}
+        path={`${AppRoute.dashboard.events.initial}/:action`}
         component={EventsAlt}
         exact
       />
@@ -45,7 +45,7 @@ const Events = () => {
                   history.push(`${AppRoute.dashboard.events.initial}/new`)
                 }
               >
-                Add Event
+                Create Event
               </Button>
             }
           />
@@ -79,7 +79,7 @@ const Events = () => {
                   history.push(`${AppRoute.dashboard.events}/${row.id}`)
                 },
               }),
-              dataSource: dataSource,
+              dataSource: eventLists,
               onRow: (record, rowIndex) => {
                 return {
                   onClick: (event) => {

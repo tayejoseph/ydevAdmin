@@ -10,9 +10,21 @@ const altEvents = (data) => ({
 
 export const getEvents = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('Eventship')
+    const { status, data: response } = await axios.get('event')
     if (status === 200) {
       dispatch(altEvents(response))
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const addEvents = (data) => async (dispatch, getState) => {
+  try {
+    const { status, data: response } = await axios.post('event', data)
+    console.log(response, 'responseresponseresponseresponse')
+    if (status === 200) {
+      await dispatch(getEvents(response))
     }
   } catch ({ response }) {
     handleError(response)
@@ -26,8 +38,8 @@ export const alterEvents = ({ id, ...data }, action) => async (
   try {
     const { status } =
       action === 'delete'
-        ? await axios.delete(`Eventship/${id}`)
-        : await axios.put(`Eventship/${id}`, { id, ...data })
+        ? await axios.delete(`event/${id}`)
+        : await axios.put(`event/${id}`, { id, ...data })
     if (status === 200) {
       message.success(
         `Sucessfull ${action === 'delete' ? 'deleted' : 'updated'} contact`,

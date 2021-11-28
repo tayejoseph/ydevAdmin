@@ -24,7 +24,13 @@ export const columns = ({ handleDeleteAlumini, loading }) => [
     align: 'center',
     width: '20rem',
     render: (support_info) => {
-      return <div className="help--detail">{support_info}</div>
+      return (
+        <ul className="help--detail">
+          {support_info
+            ? JSON.parse(support_info).map((item) => <li>{item}</li>)
+            : ''}
+        </ul>
+      )
     },
   },
   {

@@ -26,9 +26,10 @@ export const columns = ({ handleDeleteMentor, loading }) => [
   },
   {
     title: 'How we can help',
-    dataIndex: 'phone_number',
+    dataIndex: 'how_can_we_help',
+    key: 'how_can_we_help',
     align: 'center',
-    render: ({ how_can_we_help }) => {
+    render: (how_can_we_help) => {
       return <div className="help--detail">{how_can_we_help}</div>
     },
   },

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getAlumini, alterAlumini } from '../../store/action'
+import { getHireAlumini, alterHireAlumini } from '../../store/action'
 import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
@@ -22,7 +22,7 @@ const Mentors = () => {
   ]
 
   useEffect(() => {
-    dispatch(getAlumini())
+    dispatch(getHireAlumini())
   }, [dispatch])
 
   return (
@@ -49,7 +49,7 @@ const Mentors = () => {
             loading,
             handleDeleteAlumini: (row) => {
               setLoading((s) => [...s, row.id])
-              dispatch(alterAlumini(row, 'delete')).finally(() => {
+              dispatch(alterHireAlumini(row, 'delete')).finally(() => {
                 setLoading((s) => s.filter((item) => item !== row.id))
               })
             },

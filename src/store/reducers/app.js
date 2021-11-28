@@ -16,6 +16,11 @@ const UserReducer = (state = initState, action) => {
   switch (type) {
     case TYPES.clearState:
       return initState
+    case TYPES.altPrograms:
+      return {
+        ...state,
+        programLists: data,
+      }
     case TYPES.altJobApplication:
       return {
         ...state,

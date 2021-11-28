@@ -27,8 +27,7 @@ const App = () => {
       <GlobalStyle />
       <IconContext.Provider value={{ className: 'icon' }}>
         <div className="app--content">
-          <Dashboard />
-          {/* <Switch location={background || location}>
+          <Switch location={background || location}>
             <Route path="/" exact>
               <Redirect to={AppRoute.auth.signIn} />
             </Route>
@@ -46,7 +45,7 @@ const App = () => {
                 <Redirect to={AppRoute.auth.signIn} />
               )}
             </Route>
-          </Switch> */}
+          </Switch>
         </div>
         <ScrollToTop />
       </IconContext.Provider>

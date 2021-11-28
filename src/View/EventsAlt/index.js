@@ -1,54 +1,95 @@
-import React, { useEffect, useState } from 'react'
-import produce from 'immer'
-import { useSelector, useDispatch } from 'react-redux'
-import { GrFormAdd } from 'react-icons/gr'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useRouteMatch, useHistory } from 'react-router-dom'
-import { BsTrash } from 'react-icons/bs'
 import { Button, InputGroup } from '../../UI'
-import { getJobApplications } from '../../store/action'
+import { alterEvents, addEvents } from '../../store/action'
 import { formValidator } from '../../helpers'
 import { AppRoute } from '../../constants'
-import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { SectionHeader } from '../../components'
 import Container from './styles'
 
 const EventsAlt = () => {
-  const { action } = useRouteMatch().params
-
-  const [formData, setFormData] = useState({
-    title: '',
-    location: '',
-    jobType: '',
-    roles: [''],
-    experience: [''],
-    skills: [''],
-  })
-  const { jobLists } = useSelector((s) => s.AppReducer)
-  const dispatch = useDispatch()
   const history = useHistory()
-  console.log(jobLists, 'KKKK')
+  const [loading, setLoading] = useState(false)
+  const { action } = useRouteMatch().params
+  console.log(action, 'action')
+  const [formData, setFormData] = useState({
+    name: '',
+    url: '',
+    details: '',
+  })
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getJobApplications())
-  }, [dispatch])
+  const handleInput = ({ target: { name, value } }) => {
+    console.log({ name, value })
+    setFormData((s) => ({
+      ...s,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (
+      formValidator([
+        ...document.forms['event-form'].getElementsByTagName('input'),
+        ...document.forms['event-form'].getElementsByTagName('textarea'),
+      ])
+    ) {
+      setLoading(true)
+      try {
+        action === 'new'
+          ? await dispatch(addEvents(formData))
+          : await dispatch(alterEvents(formData))
+        history.goBack()
+      } finally {
+        setLoading(false)
+      }
+    }
+  }
 
   return (
     <Container>
       <SectionHeader
-        title={`${action !== 'add' ? 'Edit' : 'Add'} Event`}
+        title={`${action === 'new' ? 'Create' : 'Edit'} Event`}
         links={[
           { title: 'Events', link: AppRoute.dashboard.events.initial },
           {
-            title: 'Alt Events',
+            title: `${action === 'new' ? 'Create' : 'Alt'} Events`,
             link: `${AppRoute.dashboard.events.initial}/${action}`,
           },
         ]}
       />
-      <form>
-        <InputGroup label="Event Name" />
-        <InputGroup type="url" label="Registration Url" />
-        <InputGroup type="textarea" label="Event Details" />
-        <Button type="submit">{action !== 'add' ? 'Save' : 'Submit'}</Button>
+      <form onSubmit={handleSubmit} name="event-form" noValidate>
+        <InputGroup
+          label="Event Name"
+          name="name"
+          value={formData.name}
+          onChange={handleInput}
+          data-label="Event name"
+          required
+        />
+        <InputGroup
+          type="url"
+          label="Event Url"
+          value={formData.url}
+          required
+          name="url"
+          data-label={'Event url'}
+          onChange={handleInput}
+        />
+        <InputGroup
+          type="textarea"
+          label="Event Details"
+          value={formData.details}
+          name="details"
+          onChange={handleInput}
+          required
+          data-label={'Event details'}
+        />
+        <Button type="submit" loading={loading} spinnerWithTxt>
+          {action !== 'add' ? 'Save' : 'Submit'}
+        </Button>
       </form>
     </Container>
   )

@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getAlumini, alterAlumini } from '../../store/action'
+import {
+  getCooperationTraining,
+  alterCooperateTraining,
+} from '../../store/action'
 import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
 import Container from './styles'
 
 const CooperateTraining = () => {
   const [loading, setLoading] = useState([])
-  const { aluminiLists } = useSelector((s) => s.AppReducer)
+  const { cooperateTrainingLists } = useSelector((s) => s.AppReducer)
   const dispatch = useDispatch()
   const history = useHistory()
 
   const palletItems = [
     {
       title: 'Total Alumini',
-      value: aluminiLists ? aluminiLists.length : 0,
+      value: cooperateTrainingLists ? cooperateTrainingLists.length : 0,
     },
   ]
 
   useEffect(() => {
-    dispatch(getAlumini())
+    dispatch(getCooperationTraining())
   }, [dispatch])
 
   return (
@@ -49,12 +52,12 @@ const CooperateTraining = () => {
             loading,
             handleDeleteAlumini: (row) => {
               setLoading((s) => [...s, row.id])
-              dispatch(alterAlumini(row, 'delete')).finally(() => {
+              dispatch(alterCooperateTraining(row, 'delete')).finally(() => {
                 setLoading((s) => s.filter((item) => item !== row.id))
               })
             },
           }),
-          dataSource: aluminiLists,
+          dataSource: cooperateTrainingLists,
           onRow: (record, rowIndex) => {
             return {
               onClick: (event) => {

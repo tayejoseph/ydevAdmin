@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getAlumini, alterAlumini } from '../../store/action'
+import { getHireAlumini, alterHireAlumini } from '../../store/action'
 import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
 import { columns, dataSource } from './tableData'
 import Container from './styles'
 
-const Mentors = () => {
+const HireAlumni = () => {
   const [loading, setLoading] = useState([])
   const { aluminiLists } = useSelector((s) => s.AppReducer)
   const dispatch = useDispatch()
@@ -16,13 +16,13 @@ const Mentors = () => {
 
   const palletItems = [
     {
-      title: 'Total Alumini',
+      title: 'Total Hire Alumni',
       value: aluminiLists ? aluminiLists.length : 0,
     },
   ]
 
   useEffect(() => {
-    dispatch(getAlumini())
+    dispatch(getHireAlumini())
   }, [dispatch])
 
   return (
@@ -44,12 +44,12 @@ const Mentors = () => {
 
       <TableContainer
         {...{
-          title: 'Mentors Lists',
+          title: 'Hire Lists',
           columns: columns({
             loading,
             handleDeleteAlumini: (row) => {
               setLoading((s) => [...s, row.id])
-              dispatch(alterAlumini(row, 'delete')).finally(() => {
+              dispatch(alterHireAlumini(row, 'delete')).finally(() => {
                 setLoading((s) => s.filter((item) => item !== row.id))
               })
             },
@@ -68,4 +68,4 @@ const Mentors = () => {
   )
 }
 
-export default Mentors
+export default HireAlumni

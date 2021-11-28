@@ -78,6 +78,16 @@ export default Styled.div`
         div.ant-table-wrapper {
             min-width: 50rem;
         }
+        ul.help--detail {
+            margin: 0px;
+            padding: 0px;
+            li {
+                text-align: left;
+            }
+        }
+        .help--detail {
+            text-align: left;
+        }
     }
 
     div.action--container {
