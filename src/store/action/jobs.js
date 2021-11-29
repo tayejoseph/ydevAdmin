@@ -20,7 +20,7 @@ export const getJobApplications = () => async (dispatch, getState) => {
 
 export const postJobApplications = (data) => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.post('job-application', data)
+    const { status } = await axios.post('job-application', data)
     if (status === 200) {
       await dispatch(getJobApplications())
     }
