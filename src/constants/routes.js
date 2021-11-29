@@ -32,6 +32,9 @@ const AppRoute = {
     cooperateTraining: {
       initial: `${initialDashRoute}/cooperateTraining`,
     },
+    applications: {
+      initial: `${initialDashRoute}/applications`,
+    },
     alumini: {
       initial: `${initialDashRoute}/alumini`,
     },

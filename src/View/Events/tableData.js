@@ -19,13 +19,6 @@ export const columns = ({ loading, handleViewDetails, handleDeleteEvent }) => [
     key: 'details',
   },
   {
-    title: 'Event Status',
-    align: 'center',
-    render: () => {
-      return <button>Publish</button>
-    },
-  },
-  {
     title: 'Actions',
     align: 'center',
     render: (row) => (

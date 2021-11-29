@@ -73,22 +73,12 @@ const Events = () => {
                   dispatch(alterEvents(row, 'delete')).finally(() => {
                     setLoading(loading.filter((item) => item === row.id))
                   })
-                  history.push(`${AppRoute.dashboard.events.initial}/${row.id}`)
                 },
                 handleViewDetails: (row) => {
-                  history.push(`${AppRoute.dashboard.events}/${row.id}`)
+                  history.push(`${AppRoute.dashboard.events.initial}/${row.id}`)
                 },
               }),
               dataSource: eventLists,
-              onRow: (record, rowIndex) => {
-                return {
-                  onClick: (event) => {
-                    history.push(
-                      `${AppRoute.dashboard.events.initial}/${record.key}`,
-                    )
-                  },
-                }
-              },
             }}
           />
         </Container>

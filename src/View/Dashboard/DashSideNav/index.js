@@ -51,6 +51,10 @@ const DashSideNav = () => {
           <Settings />
           <span>Jobs</span>
         </NavLink>
+        <NavLink className="menu" to={AppRoute.dashboard.applications.initial}>
+          <Settings />
+          <span>Applications</span>
+        </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.mentors.initial}>
           <Settings />
           <span>Mentors</span>

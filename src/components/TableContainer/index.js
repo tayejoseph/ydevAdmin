@@ -39,7 +39,12 @@ const TableContainer = ({
           children
         ) : (
           <Table
-            {...{ dataSource: dataSource ? dataSource : [], columns, ...props }}
+            {...{
+              dataSource: dataSource ? dataSource : [],
+              columns,
+              loading: dataSource === '',
+              ...props,
+            }}
           />
         )}
       </div>

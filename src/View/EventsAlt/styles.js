@@ -8,4 +8,8 @@ export default Styled.div`
         grid-gap: 1em;
         margin-top: 3em;
     }
+    footer {
+        display: flex;
+        grid-gap: 1em;
+    }
 `

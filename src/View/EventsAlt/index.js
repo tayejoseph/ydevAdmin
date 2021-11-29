@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import { Button, InputGroup } from '../../UI'
 import { alterEvents, addEvents } from '../../store/action'
@@ -10,18 +10,23 @@ import Container from './styles'
 
 const EventsAlt = () => {
   const history = useHistory()
+  const { eventLists } = useSelector((s) => s.AppReducer)
   const [loading, setLoading] = useState(false)
   const { action } = useRouteMatch().params
   console.log(action, 'action')
-  const [formData, setFormData] = useState({
-    name: '',
-    url: '',
-    details: '',
-  })
+  const [formData, setFormData] = useState(() =>
+    action !== 'new'
+      ? eventLists.find((item) => Number(item.id) === Number(action))
+      : {
+          name: '',
+          url: '',
+          details: '',
+          date: '',
+        },
+  )
   const dispatch = useDispatch()
 
   const handleInput = ({ target: { name, value } }) => {
-    console.log({ name, value })
     setFormData((s) => ({
       ...s,
       [name]: value,
@@ -76,6 +81,15 @@ const EventsAlt = () => {
           required
           name="url"
           data-label={'Event url'}
+          onChange={handleInput}
+        />
+        <InputGroup
+          type="date"
+          label="Event Date"
+          value={formData.date}
+          required
+          name="date"
+          data-label={'Event date'}
           onChange={handleInput}
         />
         <InputGroup

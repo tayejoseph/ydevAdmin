@@ -20,7 +20,7 @@ server.interceptors.response.use(
     return response
   },
   (err) => {
-    if (err.response.status === 403) {
+    if (err.response.status === 403 || err.response.status === 401) {
       Cookies.remove('token')
       message.warning('Your Session has Expired kindly Login again')
       setTimeout(() => {

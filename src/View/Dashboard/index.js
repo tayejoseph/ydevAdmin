@@ -9,6 +9,7 @@ import {
   Schools,
   GetInTouch,
   Jobs,
+  Applications,
   HigherEd,
   CooperateTraining,
 } from '../'
@@ -69,6 +70,10 @@ const Dashboard = () => {
             <Route
               path={AppRoute.dashboard.mentors.initial}
               component={Mentors}
+            />
+            <Route
+              path={AppRoute.dashboard.applications.initial}
+              component={Applications}
             />
             <Route
               path={AppRoute.dashboard.higherEd.initial}

@@ -4,10 +4,13 @@ const initState = {
   authenticated: false,
   userDetails: '',
   jobLists: '',
+  eventLists: '',
   aluminiLists: '',
   programLists: '',
   mentorsLists: '',
   contactLists: '',
+  hireEdLists: '',
+  applications: '',
 }
 
 const UserReducer = (state = initState, action) => {
@@ -21,10 +24,25 @@ const UserReducer = (state = initState, action) => {
         ...state,
         programLists: data,
       }
+    case TYPES.alterApplication:
+      return {
+        ...state,
+        applications: data,
+      }
+    case TYPES.alterHireEd:
+      return {
+        ...state,
+        hireEdLists: data,
+      }
     case TYPES.altJobApplication:
       return {
         ...state,
         jobLists: data,
+      }
+    case TYPES.altEvents:
+      return {
+        ...state,
+        eventLists: data,
       }
     case TYPES.altMentors:
       return {

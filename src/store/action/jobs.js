@@ -9,14 +9,10 @@ const altJobApplication = (data) => ({
 
 export const getJobApplications = () => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.get(
-      'job-application',
-    )
-    console.log({ status, response, ...rest }, 'sdljksdskdj')
+    const { status, data: response } = await axios.get('job-application')
     if (status === 200) {
       dispatch(altJobApplication(response))
     }
-    console.log(response, 'Job response')
   } catch ({ response }) {
     handleError(response)
   }
@@ -24,15 +20,10 @@ export const getJobApplications = () => async (dispatch, getState) => {
 
 export const postJobApplications = (data) => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.post(
-      'job-application',
-      data,
-    )
-    console.log({ status, response, ...rest }, 'sdljksdskdj')
+    const { status, data: response } = await axios.post('job-application', data)
     if (status === 200) {
       await dispatch(getJobApplications())
     }
-    console.log(response, 'Sdjskdskj')
   } catch ({ response }) {
     handleError(response)
   }
@@ -43,15 +34,13 @@ export const alterJobApplication = ({ id, ...data }, action) => async (
   getState,
 ) => {
   try {
-    const { status, data: response, ...rest } =
+    const { status, data: response } =
       action === 'delete'
         ? await axios.delete(`job-application/${id}`)
         : await axios.put(`job-application/${id}`, { id, ...data })
-    console.log({ status, response, ...rest }, 'sdljksdskdj')
     if (status === 200) {
       await dispatch(getJobApplications())
     }
-    console.log(response, 'Sdjskdskj')
   } catch ({ response }) {
     handleError(response)
   }
