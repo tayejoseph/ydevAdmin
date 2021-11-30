@@ -10,7 +10,7 @@ const altAlumini = (data) => ({
 
 export const getHireAlumini = () => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.get('alumini')
+    const { status, data: response, ...rest } = await axios.get('alumini/')
     console.log({ status, response, ...rest }, 'sdljksdskdj')
     if (status === 200) {
       dispatch(altAlumini(response))

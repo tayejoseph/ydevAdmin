@@ -9,7 +9,7 @@ const altPrograms = (data) => ({
 
 export const getPrograms = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('program')
+    const { status, data: response } = await axios.get('program/')
     if (status === 200) {
       dispatch(altPrograms(response))
     }

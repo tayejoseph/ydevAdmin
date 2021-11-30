@@ -20,7 +20,11 @@ server.interceptors.response.use(
     return response
   },
   (err) => {
-    if (err.response.status === 403 || err.response.status === 401) {
+    const state = store.getState()
+    if (
+      (err.response.status === 403 || err.response.status === 401) &&
+      state.AuthReducer.authenticated
+    ) {
       Cookies.remove('token')
       message.warning('Your Session has Expired kindly Login again')
       setTimeout(() => {

@@ -10,7 +10,7 @@ const altCooperateTraining = (data) => ({
 
 export const getCooperationTraining = () => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.get('training')
+    const { status, data: response, ...rest } = await axios.get('training/')
     console.log({ status, response, ...rest }, 'sdljksdskdj')
     if (status === 200) {
       dispatch(altCooperateTraining(response))

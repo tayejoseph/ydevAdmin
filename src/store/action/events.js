@@ -10,7 +10,7 @@ const altEvents = (data) => ({
 
 export const getEvents = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('event')
+    const { status, data: response } = await axios.get('event/')
     if (status === 200) {
       dispatch(altEvents(response))
     }

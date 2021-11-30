@@ -9,7 +9,7 @@ const altJobApplication = (data) => ({
 
 export const getJobApplications = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('job-application')
+    const { status, data: response } = await axios.get('job-application/')
     if (status === 200) {
       dispatch(altJobApplication(response))
     }

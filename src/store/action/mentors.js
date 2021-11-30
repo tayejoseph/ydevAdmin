@@ -10,7 +10,7 @@ const altMentors = (data) => ({
 
 export const getMentors = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('mentorship')
+    const { status, data: response } = await axios.get('mentorship/')
     if (status === 200) {
       dispatch(altMentors(response))
     }

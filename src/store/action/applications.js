@@ -9,7 +9,7 @@ const alterApplication = (data) => ({
 
 export const getApplications = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('apply_now')
+    const { status, data: response } = await axios.get('apply_now/')
     if (status === 200) {
       dispatch(alterApplication(response))
     }

@@ -9,7 +9,7 @@ const alterHireEd = (data) => ({
 
 export const getHireEd = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('higer_education')
+    const { status, data: response } = await axios.get('higer_education/')
     if (status === 200) {
       dispatch(alterHireEd(response))
     }

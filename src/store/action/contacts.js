@@ -9,7 +9,7 @@ const altContacts = (data) => ({
 
 export const getContacts = () => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.get('get-in-touch')
+    const { status, data: response, ...rest } = await axios.get('get-in-touch/')
     console.log({ status, response, ...rest }, 'sdljksdskdj')
     if (status === 200) {
       dispatch(altContacts(response))
