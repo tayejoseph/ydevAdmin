@@ -6,7 +6,7 @@ const schoolListMenu = [
   { title: 'Product School', value: 'product_school' },
   { title: 'DevOps School', value: 'devops_school' },
   { title: 'QA/Software Testing School', value: 'QA_school' },
-  { title: 'Cloud Eng School', value: 'cloudEng_school' },
+  { title: 'Cloud Eng School', value: 'cloud_engineering_school' },
   { title: 'Salesforce School', value: 'salesforce_school' },
 ]
 

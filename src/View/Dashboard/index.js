@@ -12,6 +12,7 @@ import {
   Applications,
   HigherEd,
   CooperateTraining,
+  Instructors,
 } from '../'
 import { AppRoute, dashboardConstant } from '../../constants'
 import TopNav from './TopNav'
@@ -86,6 +87,10 @@ const Dashboard = () => {
             <Route
               path={AppRoute.dashboard.getInTouch.initial}
               component={GetInTouch}
+            />
+            <Route
+              path={AppRoute.dashboard.instructor.initial}
+              component={Instructors}
             />
             <Route
               path={AppRoute.dashboard.cooperateTraining.initial}

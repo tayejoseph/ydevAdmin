@@ -22,8 +22,8 @@ export const getEvents = () => async (dispatch, getState) => {
 export const addEvents = (data) => async (dispatch, getState) => {
   try {
     const { status, data: response } = await axios.post('event', data)
-    console.log(response, 'responseresponseresponseresponse')
     if (status === 200) {
+      message.success('Event successfully added')
       await dispatch(getEvents(response))
     }
   } catch ({ response }) {
@@ -42,7 +42,7 @@ export const alterEvents = ({ id, ...data }, action) => async (
         : await axios.put(`event/${id}`, { id, ...data })
     if (status === 200) {
       message.success(
-        `Sucessfull ${action === 'delete' ? 'deleted' : 'updated'} contact`,
+        `Sucessfull ${action === 'delete' ? 'deleted' : 'updated'} event`,
       )
       await dispatch(getEvents())
     }

@@ -21,16 +21,18 @@ server.interceptors.response.use(
   },
   (err) => {
     const state = store.getState()
-    if (
-      (err.response.status === 403 || err.response.status === 401) &&
-      state.AuthReducer.authenticated
-    ) {
-      Cookies.remove('token')
-      message.warning('Your Session has Expired kindly Login again')
-      setTimeout(() => {
-        store.dispatch(logOutHander())
-      }, 500)
-    } else {
+    if (err && err.response) {
+      if (
+        (err.response.status === 403 || err.response.status === 401) &&
+        state.AuthReducer.authenticated
+      ) {
+        Cookies.remove('token')
+        message.warning('Your Session has Expired kindly Login again')
+        setTimeout(() => {
+          store.dispatch(logOutHander())
+        }, 500)
+        return
+      }
       return Promise.reject(err)
     }
   },

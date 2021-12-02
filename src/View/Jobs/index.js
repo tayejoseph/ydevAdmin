@@ -2,20 +2,19 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import { Button } from '../../UI'
-import { getJobApplications } from '../../store/action'
+import { getPostedJobs } from '../../store/action'
 import { AppRoute } from '../../constants'
 import JobAlt from '../JobsAlt'
 import JobDetails from '../JobDetails'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
 import Container from './styles'
 
 const Jobs = () => {
   const { jobLists } = useSelector((s) => s.AppReducer)
   const dispatch = useDispatch()
   const history = useHistory()
-  console.log(jobLists, 'KKKK')
 
   const palletItems = [
     {
@@ -32,8 +31,9 @@ const Jobs = () => {
       value: jobLists ? jobLists.length : 0,
     },
   ]
+
   useEffect(() => {
-    dispatch(getJobApplications())
+    dispatch(getPostedJobs())
   }, [dispatch])
 
   return (
@@ -88,7 +88,7 @@ const Jobs = () => {
                   history.push(`${AppRoute.dashboard.jobs.details}/${row.id}`)
                 },
               }),
-              dataSource: dataSource,
+              dataSource: [],
               onRow: (record, rowIndex) => {
                 return {
                   onClick: (event) => {

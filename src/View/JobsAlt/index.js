@@ -1,46 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import produce from 'immer'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { GrFormAdd } from 'react-icons/gr'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import { BsTrash } from 'react-icons/bs'
 import { Button, InputGroup } from '../../UI'
-import { getJobApplications } from '../../store/action'
+import { getJobApplications, createJobApplications } from '../../store/action'
 import { formValidator } from '../../helpers'
 import { AppRoute } from '../../constants'
-import { UsersPallet } from '../../asset/convertedSvg'
-import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { SectionHeader } from '../../components'
 import Container from './styles'
 
 const Jobs = () => {
   const { action } = useRouteMatch().params
-
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     title: '',
     location: '',
-    jobType: '',
-    roles: [''],
-    experience: [''],
-    skills: [''],
+    job_type: '',
+    roles: [{ name: '' }],
+    responbilities: [{ name: '' }],
+    skills: [{ name: '' }],
   })
-  const { jobLists } = useSelector((s) => s.AppReducer)
   const dispatch = useDispatch()
   const history = useHistory()
-  console.log(jobLists, 'KKKK')
 
-  const palletItems = [
-    {
-      title: 'Total Posted Job Applications',
-      value: jobLists ? jobLists.length : 0,
-    },
-  ]
   useEffect(() => {
     dispatch(getJobApplications())
   }, [dispatch])
 
   const handleAltMultiple = (index, { value }, action, section) => {
-    console.log({ index, value, action, section }, 'Testing')
     setFormData(
       produce((draft) => {
         if (action === 'delete') {
@@ -48,18 +37,43 @@ const Jobs = () => {
             (item, itemIndex) => itemIndex !== index,
           )
         } else if (action === 'add') {
-          draft[section].push('')
+          draft[section].push({ name: '' })
         } else {
-          draft[section][index] = value
+          draft[section][index].name = value
           return draft
         }
       }),
     )
   }
 
+  const handleInput = ({ target: { name, value } }) => {
+    setFormData((s) => ({
+      ...s,
+      [name]: value,
+    }))
+  }
+
   const handleAddMoreAddsOn = (className, section) => {
     if (formValidator(document.getElementsByClassName(className))) {
       handleAltMultiple(null, {}, 'add', section)
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (
+      formValidator(document.forms['job-form'].getElementsByTagName('input'))
+    ) {
+      setLoading(true)
+      try {
+        const response = await dispatch(createJobApplications(formData))
+        console.log(response, 'response')
+        if (response && response.success) {
+          history.goBack()
+        }
+      } finally {
+        setLoading(false)
+      }
     }
   }
 
@@ -75,24 +89,43 @@ const Jobs = () => {
           },
         ]}
       />
-      <form>
+      <form name="job-form" onSubmit={handleSubmit} noValidate>
         <section className="top--section">
-          <InputGroup label="Job Title" />
-          <InputGroup label="Office Location" />
+          <InputGroup
+            label="Job Title"
+            name="title"
+            value={formData.title}
+            onChange={handleInput}
+            data-label="Job title"
+            required
+          />
+          <InputGroup
+            label="Office Location"
+            name="location"
+            value={formData.location}
+            onChange={handleInput}
+            data-label="Office location"
+          />
           <InputGroup
             label="Job Type"
             type="select"
+            name="job_type"
+            value={formData.job_type}
+            onChange={handleInput}
+            required
+            data-label="Job Type"
             optionLists={
               <>
-                <option>Remote</option>
-                <option>Non Remote</option>
+                <option value="">Select Job Type ...</option>
+                <option value="Remote">Remote</option>
+                <option value="Non remote">Non Remote</option>
               </>
             }
           />
         </section>
         <section>
           <div className="jobRole--container">
-            <h3>Job Roles & responsibilities</h3>
+            <h3>Job Roles & responbilities</h3>
             <div className="role--form">
               {formData.roles &&
                 formData.roles.map((item, index) => (
@@ -101,7 +134,7 @@ const Jobs = () => {
                       <InputGroup
                         type="textarea"
                         inputClassName={`roles--${index} role-input`}
-                        defaultValue={item}
+                        defaultValue={item.name}
                         onBlur={(e) =>
                           handleAltMultiple(index, e.target, null, 'roles')
                         }
@@ -143,18 +176,23 @@ const Jobs = () => {
         </section>
         <section>
           <div className="jobRole--container">
-            <h3>Prefered responsibilities</h3>
+            <h3>Prefered responbilities</h3>
             <div className="role--form">
-              {formData.experience &&
-                formData.experience.map((item, index) => (
+              {formData.responbilities &&
+                formData.responbilities.map((item, index) => (
                   <div className={`input--row row--row`} key={`${item.value}`}>
                     <div>
                       <InputGroup
                         type="textarea"
-                        inputClassName={`experience--${index} experience-input`}
-                        defaultValue={item}
+                        inputClassName={`responbilities--${index} responbilities-input`}
+                        defaultValue={item.name}
                         onBlur={(e) =>
-                          handleAltMultiple(index, e.target, null, 'experience')
+                          handleAltMultiple(
+                            index,
+                            e.target,
+                            null,
+                            'responbilities',
+                          )
                         }
                         placeholder="Faster delivery time"
                         style={{ marginBottom: 0 }}
@@ -163,13 +201,16 @@ const Jobs = () => {
                       />
                     </div>
 
-                    {index === formData.experience.length - 1 ||
-                    formData.experience.length === 1 ? (
+                    {index === formData.responbilities.length - 1 ||
+                    formData.responbilities.length === 1 ? (
                       <button
                         type="button"
                         className="more--btn"
                         onClick={() => {
-                          handleAddMoreAddsOn(`experience-input`, 'experience')
+                          handleAddMoreAddsOn(
+                            `responbilities-input`,
+                            'responbilities',
+                          )
                         }}
                       >
                         <GrFormAdd />
@@ -180,7 +221,12 @@ const Jobs = () => {
                         type="button"
                         className="trash--btn"
                         onClick={() => {
-                          handleAltMultiple(index, {}, 'delete', 'experience')
+                          handleAltMultiple(
+                            index,
+                            {},
+                            'delete',
+                            'responbilities',
+                          )
                         }}
                       >
                         <BsTrash />
@@ -204,7 +250,7 @@ const Jobs = () => {
                       <InputGroup
                         type="textarea"
                         inputClassName={`skills--${index} skills-input`}
-                        defaultValue={item}
+                        defaultValue={item.name}
                         onBlur={(e) =>
                           handleAltMultiple(index, e.target, null, 'skills')
                         }
@@ -244,7 +290,9 @@ const Jobs = () => {
             </div>
           </div>
         </section>
-        <Button type="submit">{action !== 'add' ? 'Save' : 'Submit'}</Button>
+        <Button type="submit" loading={loading} spinnerWithTxt>
+          {action !== 'add' ? 'Save' : 'Submit'}
+        </Button>
       </form>
     </Container>
   )

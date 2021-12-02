@@ -8,9 +8,11 @@ const initState = {
   aluminiLists: '',
   programLists: '',
   mentorsLists: '',
+  trainingLists: '',
   contactLists: '',
   hireEdLists: '',
   applications: '',
+  instructorsLists: '',
 }
 
 const UserReducer = (state = initState, action) => {
@@ -19,10 +21,20 @@ const UserReducer = (state = initState, action) => {
   switch (type) {
     case TYPES.clearState:
       return initState
+    case TYPES.altCooperateTraining:
+      return {
+        ...state,
+        trainingLists: data,
+      }
     case TYPES.altPrograms:
       return {
         ...state,
         programLists: data,
+      }
+    case TYPES.altInstructor:
+      return {
+        ...state,
+        instructorsLists: data,
       }
     case TYPES.alterApplication:
       return {

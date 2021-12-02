@@ -1,4 +1,5 @@
 import { BsTrash } from 'react-icons/bs'
+import moment from 'moment'
 import { Button } from '../../UI'
 import { Edit } from '../../asset/convertedSvg'
 
@@ -10,8 +11,10 @@ export const columns = ({ loading, handleViewDetails, handleDeleteEvent }) => [
   },
   {
     title: 'Event Date',
-    dataIndex: 'date',
-    key: 'date',
+    dataIndex: 'event_date',
+    key: 'event_date',
+    render: (event_date) =>
+      moment(event_date).format('MMMM Do YYYY, h:mm:ss a'),
   },
   {
     title: 'Event Details',

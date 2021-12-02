@@ -21,7 +21,7 @@ const EventsAlt = () => {
           name: '',
           url: '',
           details: '',
-          date: '',
+          event_date: '',
         },
   )
   const dispatch = useDispatch()
@@ -84,11 +84,11 @@ const EventsAlt = () => {
           onChange={handleInput}
         />
         <InputGroup
-          type="date"
+          type="datetime-local"
           label="Event Date"
-          value={formData.date}
+          defaultValue={formData.event_date}
           required
-          name="date"
+          name="event_date"
           data-label={'Event date'}
           onChange={handleInput}
         />

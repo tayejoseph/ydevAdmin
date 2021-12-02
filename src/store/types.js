@@ -9,6 +9,8 @@ const Types = {
   clearState: 'CLEAR_STATE',
   alterHireEd: 'ALT_HIRE_ED',
   alterApplication: 'ALT_APPLICATION',
+  altInstructor: 'ALT_INSTRUCTOR',
+  altCooperateTraining: 'ALT_TRAINING',
 }
 
 export default Types

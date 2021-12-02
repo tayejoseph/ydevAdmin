@@ -16,7 +16,7 @@ const Schools = () => {
   const history = useHistory()
 
   const palletItems = [
-    { title: 'Total Applications', value: programLists.length },
+    { title: 'Total Applications', value: programLists?.length },
   ]
 
   const activeSchoolData = programLists

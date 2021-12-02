@@ -29,6 +29,9 @@ const AppRoute = {
     schools: {
       initial: `${initialDashRoute}/schools`,
     },
+    instructor: {
+      initial: `${initialDashRoute}/instructor`,
+    },
     cooperateTraining: {
       initial: `${initialDashRoute}/cooperateTraining`,
     },

@@ -2,36 +2,36 @@ import { message } from 'antd'
 import { axios, handleError } from '../../lib'
 import types from '../types'
 
-const alterHireEd = (data) => ({
-  type: types.alterHireEd,
+const alterInstructors = (data) => ({
+  type: types.altInstructor,
   data,
 })
 
-export const getHireEd = () => async (dispatch, getState) => {
+export const getInstructors = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('higher_education/')
+    const { status, data: response } = await axios.get('instructor/')
     if (status === 200) {
-      dispatch(alterHireEd(response))
+      dispatch(alterInstructors(response))
     }
   } catch ({ response }) {
     handleError(response)
   }
 }
 
-export const altHireEd = ({ id, ...data }, action) => async (
+export const altInstructors = ({ id, ...data }, action) => async (
   dispatch,
   getState,
 ) => {
   try {
     const { status } =
       action === 'delete'
-        ? await axios.delete(`higher_education/${id}`)
-        : await axios.put(`higher_education/${id}`, { id, ...data })
+        ? await axios.delete(`instructor/${id}`)
+        : await axios.put(`instructor/${id}`, { id, ...data })
     if (status === 200) {
       message.success(
         `Sucessfull ${action === 'delete' ? 'deleted' : 'updated'} contact`,
       )
-      await dispatch(getHireEd())
+      await dispatch(getInstructors())
     }
   } catch ({ response }) {
     handleError(response)

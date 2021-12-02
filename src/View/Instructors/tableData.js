@@ -4,19 +4,14 @@ import { Delete } from '../../asset/convertedSvg'
 
 export const columns = ({ handleDeleteAlumini, loading }) => [
   {
-    title: 'Full Name',
-    dataIndex: 'full_name',
-    key: 'full_name',
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
     title: 'Company Name',
     dataIndex: 'company_name',
     key: 'company_name',
+  },
+  {
+    title: 'Company Email',
+    dataIndex: 'email',
+    key: 'email',
   },
   {
     title: 'Phone Number',
@@ -25,10 +20,9 @@ export const columns = ({ handleDeleteAlumini, loading }) => [
   },
   {
     title: 'Support Info',
-    dataIndex: 'how_can_we_help',
     align: 'center',
     width: '20rem',
-    render: (how_can_we_help) => {
+    render: ({ how_can_we_help }) => {
       return <div className="help--detail">{how_can_we_help}</div>
     },
   },
@@ -55,16 +49,5 @@ export const columns = ({ handleDeleteAlumini, loading }) => [
         </Button>
       </div>
     ),
-  },
-]
-
-export const dataSource = [
-  {
-    full_name: 'string',
-    email: 'user@example.com',
-    company_name: 'string',
-    how_can_we_help: 'string',
-    id: 0,
-    uploadAt: '2021-11-06T12:33:01.948Z',
   },
 ]

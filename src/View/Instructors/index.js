@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import {
-  getCooperationTraining,
-  alterCooperateTraining,
-} from '../../store/action'
+import { getInstructors, altInstructors } from '../../store/action'
 import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
 import { columns } from './tableData'
 import Container from './styles'
 
-const CooperateTraining = () => {
+const HigherEd = () => {
   const [loading, setLoading] = useState([])
-  const { trainingLists } = useSelector((s) => s.AppReducer)
+  const { instructorsLists } = useSelector((s) => s.AppReducer)
   const dispatch = useDispatch()
   const history = useHistory()
 
   const palletItems = [
     {
-      title: 'Total Alumini',
-      value: trainingLists ? trainingLists.length : 0,
+      title: 'Total Instructors',
+      value: instructorsLists ? instructorsLists.length : 0,
     },
   ]
 
   useEffect(() => {
-    dispatch(getCooperationTraining())
+    dispatch(getInstructors())
   }, [dispatch])
 
   return (
     <Container>
-      <SectionHeader title="Cooperate Training" links={[]} />
+      <SectionHeader title="Instructors" links={[]} />
       <div className="pallet--grid__container">
         {palletItems.map((item) => (
           <div className="pallet--item">
@@ -47,17 +44,17 @@ const CooperateTraining = () => {
 
       <TableContainer
         {...{
-          title: 'Cooperate Training Lists',
+          title: 'Instructors Lists',
           columns: columns({
             loading,
             handleDeleteAlumini: (row) => {
               setLoading((s) => [...s, row.id])
-              dispatch(alterCooperateTraining(row, 'delete')).finally(() => {
+              dispatch(altInstructors(row, 'delete')).finally(() => {
                 setLoading((s) => s.filter((item) => item !== row.id))
               })
             },
           }),
-          dataSource: trainingLists,
+          dataSource: instructorsLists,
           onRow: (record, rowIndex) => {
             return {
               onClick: (event) => {
@@ -71,4 +68,4 @@ const CooperateTraining = () => {
   )
 }
 
-export default CooperateTraining
+export default HigherEd

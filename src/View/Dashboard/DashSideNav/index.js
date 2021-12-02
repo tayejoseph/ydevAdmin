@@ -39,6 +39,10 @@ const DashSideNav = () => {
           <Settings />
           <span>Higher Ed</span>
         </NavLink>
+        <NavLink className="menu" to={AppRoute.dashboard.instructor.initial}>
+          <Settings />
+          <span>Instructors</span>
+        </NavLink>
         <NavLink
           className="menu"
           to={AppRoute.dashboard.cooperateTraining.initial}
