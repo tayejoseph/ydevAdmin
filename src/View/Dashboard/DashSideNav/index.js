@@ -1,5 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { AiOutlineContacts } from 'react-icons/ai'
+import { MdBusiness } from 'react-icons/md'
+import { RiCalendarEventLine } from 'react-icons/ri'
+import { IoMdContacts } from 'react-icons/io'
 import { AppRoute } from '../../../constants'
 import { YdevIllustration } from '../../../components'
 import {
@@ -23,16 +27,16 @@ const DashSideNav = () => {
           <span>Dashboard</span>
         </NavLink>
         <NavLink className={`menu`} to={AppRoute.dashboard.schools.initial}>
-          <Users />
+          <MdBusiness />
           <span>Schools</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.events.initial}>
-          <Settings />
+          <RiCalendarEventLine />
           <span>Events</span>
         </NavLink>
         <hr />
         <NavLink className="menu" to={AppRoute.dashboard.alumini.initial}>
-          <Settings />
+          <IoMdContacts />
           <span>Hire Alumini</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.higherEd.initial}>
@@ -64,7 +68,7 @@ const DashSideNav = () => {
           <span>Mentors</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.getInTouch.initial}>
-          <Settings />
+          <AiOutlineContacts />
           <span>Contacts</span>
         </NavLink>
         {/* <NavLink className="menu" to={AppRoute.dashboard.payments}>
