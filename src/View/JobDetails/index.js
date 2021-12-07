@@ -5,7 +5,7 @@ import { GrFormAdd } from 'react-icons/gr'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import { BsTrash } from 'react-icons/bs'
 import { Button, InputGroup } from '../../UI'
-import { alterJobApplication } from '../../store/action'
+import { alterJobApplications, getPostedJobDetail } from '../../store/action'
 import { formValidator } from '../../helpers'
 import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
@@ -16,25 +16,30 @@ import Container from './styles'
 const JobDetails = () => {
   const { jobId } = useRouteMatch().params
   const [loading, setLoading] = useState([])
-  const { jobLists } = useSelector((s) => s.AppReducer)
+  const [activeJobDetail, setState] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
 
   const palletItems = [
     {
       title: 'Total Applicants',
-      value: 0,
-    },
-    {
-      title: 'Job Status',
-      value: 'Published',
+      value: activeJobDetail?.applications?.length,
     },
   ]
+
+  useEffect(() => {
+    getPostedJobDetail(jobId).then((response) => {
+      if (response && response.data) {
+        setState(response.data)
+      }
+      console.log(response, 'response')
+    })
+  }, [jobId])
 
   return (
     <Container>
       <SectionHeader
-        title="Jobs Name"
+        title={`Jobs Name: ${activeJobDetail?.title}`}
         links={[
           { title: 'Jobs', link: AppRoute.dashboard.jobs.initial },
           {
@@ -72,20 +77,21 @@ const JobDetails = () => {
 
       <TableContainer
         {...{
-          title: 'Front end developer',
+          title: 'Application Lists',
+          loading: activeJobDetail === '',
           columns: columns({
             loading,
             handleDeleteJob: (row) => {
               setLoading((s) => [...s, row.id])
-              dispatch(alterJobApplication({ id: row.id }, 'delete')).finally(
+              dispatch(alterJobApplications({ id: row.id }, 'delete')).finally(
                 () => {
                   setLoading((s) => s.filter((item) => item !== row.id))
                 },
               )
-              history.push(`${AppRoute.dashboard.admin.details}/${row.id}`)
+              history.push(`${AppRoute.dashboard.jobs.details}/${row.id}`)
             },
           }),
-          dataSource,
+          dataSource: activeJobDetail?.applications,
         }}
       />
     </Container>

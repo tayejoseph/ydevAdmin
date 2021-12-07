@@ -11,6 +11,7 @@ const Types = {
   alterApplication: 'ALT_APPLICATION',
   altInstructor: 'ALT_INSTRUCTOR',
   altCooperateTraining: 'ALT_TRAINING',
+  altConsultation: 'ALT_CONSULTATION',
 }
 
 export default Types

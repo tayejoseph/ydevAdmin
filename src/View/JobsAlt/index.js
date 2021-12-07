@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import produce from 'immer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { GrFormAdd } from 'react-icons/gr'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import { BsTrash } from 'react-icons/bs'
 import { Button, InputGroup } from '../../UI'
-import { getJobApplications, createJobApplications } from '../../store/action'
+import { alterJobPost, createJobApplications } from '../../store/action'
 import { formValidator } from '../../helpers'
 import { AppRoute } from '../../constants'
 import { SectionHeader } from '../../components'
 import Container from './styles'
 
-const Jobs = () => {
+const JobsAlt = () => {
   const { action } = useRouteMatch().params
+  const { jobLists } = useSelector((s) => s.AppReducer)
   const [loading, setLoading] = useState(false)
-  const [formData, setFormData] = useState({
-    title: '',
-    location: '',
-    job_type: '',
-    roles: [{ name: '' }],
-    responbilities: [{ name: '' }],
-    skills: [{ name: '' }],
-  })
+  const [formData, setFormData] = useState(() =>
+    action !== 'new'
+      ? jobLists.find((item) => Number(item.id) === Number(action))
+      : {
+          title: '',
+          location: '',
+          job_type: '',
+          roles: [{ name: '' }],
+          responbilities: [{ name: '' }],
+          skills: [{ name: '' }],
+        },
+  )
   const dispatch = useDispatch()
   const history = useHistory()
-
-  useEffect(() => {
-    dispatch(getJobApplications())
-  }, [dispatch])
 
   const handleAltMultiple = (index, { value }, action, section) => {
     setFormData(
@@ -66,7 +67,11 @@ const Jobs = () => {
     ) {
       setLoading(true)
       try {
-        const response = await dispatch(createJobApplications(formData))
+        const response = await dispatch(
+          action === 'new'
+            ? createJobApplications(formData)
+            : alterJobPost(formData),
+        )
         console.log(response, 'response')
         if (response && response.success) {
           history.goBack()
@@ -80,12 +85,12 @@ const Jobs = () => {
   return (
     <Container>
       <SectionHeader
-        title="Jobs"
+        title="JobsAlt"
         links={[
-          { title: 'Jobs', link: AppRoute.dashboard.jobs.initial },
+          { title: 'JobsAlt', link: AppRoute.dashboard.jobs.details },
           {
             title: 'Alt Job',
-            link: `${AppRoute.dashboard.jobs.initial}/${action}`,
+            link: `${AppRoute.dashboard.jobs.details}/${action}`,
           },
         ]}
       />
@@ -298,4 +303,4 @@ const Jobs = () => {
   )
 }
 
-export default Jobs
+export default JobsAlt

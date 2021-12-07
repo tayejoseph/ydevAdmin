@@ -12,7 +12,21 @@ export const getJobApplications = () => async (dispatch, getState) => {
   try {
     const { status, data: response } = await axios.get('job-application/')
     if (status === 200) {
-      dispatch(altJobApplication(response))
+      return response
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const alterJobApplications = async ({ id, ...data }, action) => {
+  try {
+    const { status } =
+      action === 'delete'
+        ? await axios.delete(`job-application/${id}`)
+        : await axios.put(`job-application/${id}`, { id, ...data })
+    if (status === 200) {
+      await getJobApplications()
     }
   } catch ({ response }) {
     handleError(response)
@@ -21,10 +35,18 @@ export const getJobApplications = () => async (dispatch, getState) => {
 
 export const getPostedJobs = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('job')
+    const { status, data: response } = await axios.get('job/')
     if (status === 200) {
       dispatch(altJobApplication(response))
     }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const getPostedJobDetail = async (id) => {
+  try {
+    return await axios.get(`job/${id}`)
   } catch ({ response }) {
     handleError(response)
   }
@@ -35,7 +57,7 @@ export const createJobApplications = (data) => async (dispatch, getState) => {
     const { status } = await axios.post('job', data)
     if (status === 200) {
       message.success('Successfully created a job')
-      await dispatch(getJobApplications())
+      await dispatch(getPostedJobs())
       return {
         success: true,
       }
@@ -45,17 +67,20 @@ export const createJobApplications = (data) => async (dispatch, getState) => {
   }
 }
 
-export const alterJobApplication = ({ id, ...data }, action) => async (
+export const alterJobPost = ({ id, ...data }, action) => async (
   dispatch,
   getState,
 ) => {
   try {
-    const { status, data: response } =
+    const { status } =
       action === 'delete'
-        ? await axios.delete(`job-application/${id}`)
-        : await axios.put(`job-application/${id}`, { id, ...data })
+        ? await axios.delete(`job/${id}`)
+        : await axios.put(`job/${id}`, { id, ...data })
     if (status === 200) {
-      await dispatch(getJobApplications())
+      await dispatch(getPostedJobs())
+      return {
+        success: true,
+      }
     }
   } catch ({ response }) {
     handleError(response)

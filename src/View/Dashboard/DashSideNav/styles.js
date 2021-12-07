@@ -30,7 +30,7 @@ export default Styled.div`
             align-items: center;
             grid-template-columns: 3rem 1fr 3rem;
             .icon {
-                transition: all 1s;
+                /* transition: all 1s; */
             }
             &.active {
                 background: #F4F8FE;
@@ -44,7 +44,7 @@ export default Styled.div`
                     }
                 }
                 .icon {
-                    transform: rotate(90deg);
+                    /* transform: rotate(90deg); */
                 }
             }
         }

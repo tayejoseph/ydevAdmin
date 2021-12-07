@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { InputGroup, Button } from '../../../UI'
 import Container from './styles'
 
@@ -25,7 +24,8 @@ const LoginForm = ({ handleInput, formData, loading }) => {
         placeholder="********"
       />
       <div className="forgot--password__container">
-        <Link to="/">Forgot Password?</Link>
+        {/* <Link to="/">Forgot Password?</Link> */}
+        <br />
       </div>
       <Button full loading={loading} spinnerWithTxt={true} type="submit">
         Login

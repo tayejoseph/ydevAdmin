@@ -13,6 +13,7 @@ const initState = {
   hireEdLists: '',
   applications: '',
   instructorsLists: '',
+  consultationLists: '',
 }
 
 const UserReducer = (state = initState, action) => {
@@ -70,6 +71,11 @@ const UserReducer = (state = initState, action) => {
       return {
         ...state,
         contactLists: data,
+      }
+    case TYPES.altConsultation:
+      return {
+        ...state,
+        consultationLists: data,
       }
     default:
       return state

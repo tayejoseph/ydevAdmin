@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import { Button } from '../../UI'
-import { getPostedJobs } from '../../store/action'
+import { getPostedJobs, alterJobPost } from '../../store/action'
 import { AppRoute } from '../../constants'
 import JobAlt from '../JobsAlt'
 import JobDetails from '../JobDetails'
@@ -12,22 +12,14 @@ import { columns } from './tableData'
 import Container from './styles'
 
 const Jobs = () => {
+  const [loading, setLoading] = useState([])
   const { jobLists } = useSelector((s) => s.AppReducer)
   const dispatch = useDispatch()
   const history = useHistory()
 
   const palletItems = [
     {
-      title: 'Total Posted Job Applications',
-      value: jobLists ? jobLists.length : 0,
-    },
-    {
-      title: 'Total Published Job Applications',
-      value: jobLists ? jobLists.length : 0,
-    },
-
-    {
-      title: 'Total Unpublished Job Applications',
+      title: 'Total Job Applications',
       value: jobLists ? jobLists.length : 0,
     },
   ]
@@ -80,24 +72,39 @@ const Jobs = () => {
           <TableContainer
             {...{
               title: 'Posted Jobs',
+              loading: jobLists === '',
               columns: columns({
+                loading,
                 handleAltJob: (row) => {
                   history.push(`${AppRoute.dashboard.jobs.initial}/${row.id}`)
                 },
                 handleViewDetails: (row) => {
                   history.push(`${AppRoute.dashboard.jobs.details}/${row.id}`)
                 },
-              }),
-              dataSource: [],
-              onRow: (record, rowIndex) => {
-                return {
-                  onClick: (event) => {
-                    history.push(
-                      `${AppRoute.dashboard.jobs.initial}/${record.key}`,
+                handleAltPublish: (row) => {
+                  setLoading((s) => [...s, `pub-${row.id}`])
+                  dispatch(
+                    alterJobPost({
+                      id: row.id,
+                      ...row,
+                      published: !row.published,
+                    }),
+                  ).finally(() => {
+                    setLoading((s) =>
+                      s.filter((item) => item !== `pub-${row.id}`),
                     )
-                  },
-                }
-              },
+                  })
+                },
+                handleDelete: (row) => {
+                  setLoading((s) => [...s, row.id])
+                  dispatch(alterJobPost({ id: row.id }, 'delete')).finally(
+                    () => {
+                      setLoading((s) => s.filter((item) => item !== row.id))
+                    },
+                  )
+                },
+              }),
+              dataSource: jobLists,
             }}
           />
         </Container>

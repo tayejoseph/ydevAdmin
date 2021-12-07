@@ -29,7 +29,7 @@ const TableContainer = ({
             <input placeholder="Search" />
           </div>
           <CSVLink data={dataSource ? dataSource : []}>
-            <button>Export Data</button>
+            <button type="button">Export Data</button>
           </CSVLink>
         </form>
       </div>

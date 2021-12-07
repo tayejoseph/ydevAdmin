@@ -1,4 +1,3 @@
-import { FiEye } from 'react-icons/fi'
 import { Button } from '../../UI'
 import { BsTrash } from 'react-icons/bs'
 import { AiOutlineLinkedin, AiOutlineGlobal } from 'react-icons/ai'
@@ -13,6 +12,11 @@ export const columns = ({ handleDeleteJob, loading }) => [
     title: 'Email',
     dataIndex: 'email',
     key: 'email',
+  },
+  {
+    title: 'Role',
+    dataIndex: 'role',
+    key: 'role',
   },
   {
     title: 'Links',

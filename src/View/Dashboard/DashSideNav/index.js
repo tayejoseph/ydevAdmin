@@ -2,17 +2,15 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AiOutlineContacts } from 'react-icons/ai'
 import { MdBusiness } from 'react-icons/md'
-import { RiCalendarEventLine } from 'react-icons/ri'
+import { FaChalkboardTeacher, FaUserGraduate } from 'react-icons/fa'
+import { GiTeacher } from 'react-icons/gi'
+import { BiConversation } from 'react-icons/bi'
+import { GoBriefcase } from 'react-icons/go'
+import { RiCalendarEventLine, RiMailAddFill, RiGuideLine } from 'react-icons/ri'
 import { IoMdContacts } from 'react-icons/io'
 import { AppRoute } from '../../../constants'
 import { YdevIllustration } from '../../../components'
-import {
-  Home,
-  Users,
-  Settings,
-  Loans,
-  Repayments,
-} from '../../../asset/convertedSvg'
+import { Home } from '../../../asset/convertedSvg'
 import Container from './styles'
 
 const DashSideNav = () => {
@@ -40,31 +38,35 @@ const DashSideNav = () => {
           <span>Hire Alumini</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.higherEd.initial}>
-          <Settings />
+          <FaUserGraduate />
           <span>Higher Ed</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.instructor.initial}>
-          <Settings />
+          <GiTeacher />
           <span>Instructors</span>
         </NavLink>
         <NavLink
           className="menu"
           to={AppRoute.dashboard.cooperateTraining.initial}
         >
-          <Settings />
-          <span>Cooperate Training</span>
+          <FaChalkboardTeacher />
+          <span>Corperate Training</span>
         </NavLink>
         <hr />
+        <NavLink className="menu" to={AppRoute.dashboard.consultation.initial}>
+          <BiConversation />
+          <span>Consultation</span>
+        </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.jobs.initial}>
-          <Settings />
+          <GoBriefcase />
           <span>Jobs</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.applications.initial}>
-          <Settings />
+          <RiMailAddFill />
           <span>Applications</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.mentors.initial}>
-          <Settings />
+          <RiGuideLine />
           <span>Mentors</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.getInTouch.initial}>

@@ -1,31 +1,42 @@
 import { FiEye } from 'react-icons/fi'
-import { Button } from '../../UI'
+import { Button, Spinner } from '../../UI'
 import { Edit, Delete } from '../../asset/convertedSvg'
 
-export const columns = ({ handleViewDetails, handleAltJob }) => [
+export const columns = ({
+  loading,
+  handleViewDetails,
+  handleAltJob,
+  handleDelete,
+  handleAltPublish,
+}) => [
   {
     title: 'Job Title',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'title',
+    key: 'title',
   },
   {
     title: 'Job Type',
-    dataIndex: 'type',
-    key: 'type',
+    dataIndex: 'job_type',
+    key: 'job_type',
   },
   {
-    title: 'Job Status',
-    dataIndex: 'status',
-    key: 'status',
-    align: 'center',
-    render: (status) => <button>{status}</button>,
-  },
-  {
-    title: 'Total Applicants',
-    dataIndex: 'totalApplicants',
-    key: 'totalApplicants',
+    title: 'Job Location',
+    dataIndex: 'location',
+    key: 'location',
     align: 'center',
   },
+  // {
+  //   title: 'Publish',
+  //   align: 'center',
+  //   render: (row) =>
+  //     loading.includes(`pub-${row.id}`) ? (
+  //       <Spinner />
+  //     ) : (
+  //       <button onClick={() => handleAltPublish(row)}>
+  //         {row.published ? 'Unpublish' : 'Publish'}
+  //       </button>
+  //     ),
+  // },
   {
     title: 'Actions',
     align: 'center',
@@ -47,6 +58,16 @@ export const columns = ({ handleViewDetails, handleAltJob }) => [
           }}
         >
           <FiEye />
+        </Button>
+        <Button
+          icon
+          loading={loading.includes(row.id)}
+          onClick={(e) => {
+            e.stopPropagation()
+            handleDelete(row)
+          }}
+        >
+          <Delete />
         </Button>
       </div>
     ),

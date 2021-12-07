@@ -23,6 +23,9 @@ const AppRoute = {
     mentors: {
       initial: `${initialDashRoute}/mentors`,
     },
+    consultation: {
+      initial: `${initialDashRoute}/consultation`,
+    },
     higherEd: {
       initial: `${initialDashRoute}/higherEd`,
     },

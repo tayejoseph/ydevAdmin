@@ -14,6 +14,9 @@ export default Styled.div`
             font-weight: 600;
         }
     }
+    button {
+        cursor: pointer;
+    }
     div.table--grid__container {
         display: grid;
         grid-gap: 1em;
