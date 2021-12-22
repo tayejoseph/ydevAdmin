@@ -50,7 +50,7 @@ const DashSideNav = () => {
           to={AppRoute.dashboard.cooperateTraining.initial}
         >
           <FaChalkboardTeacher />
-          <span>Corperate Training</span>
+          <span>Corporate Training</span>
         </NavLink>
         <hr />
         <NavLink className="menu" to={AppRoute.dashboard.consultation.initial}>

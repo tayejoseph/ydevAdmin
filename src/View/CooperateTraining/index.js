@@ -19,7 +19,7 @@ const CooperateTraining = () => {
 
   const palletItems = [
     {
-      title: 'Total Alumini',
+      title: 'Total Corporate Trainings',
       value: trainingLists ? trainingLists.length : 0,
     },
   ]
@@ -30,7 +30,7 @@ const CooperateTraining = () => {
 
   return (
     <Container>
-      <SectionHeader title="Cooperate Training" links={[]} />
+      <SectionHeader title="Corporate Training" links={[]} />
       <div className="pallet--grid__container">
         {palletItems.map((item) => (
           <div className="pallet--item">
@@ -47,7 +47,7 @@ const CooperateTraining = () => {
 
       <TableContainer
         {...{
-          title: 'Cooperate Training Lists',
+          title: 'Corporate Training Lists',
           columns: columns({
             loading,
             handleDeleteAlumini: (row) => {

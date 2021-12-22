@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import produce from 'immer'
-import { useSelector, useDispatch } from 'react-redux'
-import { GrFormAdd } from 'react-icons/gr'
 import { useRouteMatch, useHistory } from 'react-router-dom'
-import { BsTrash } from 'react-icons/bs'
-import { Button, InputGroup } from '../../UI'
+import { Button } from '../../UI'
 import { alterJobApplications, getPostedJobDetail } from '../../store/action'
-import { formValidator } from '../../helpers'
 import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
 import Container from './styles'
 
 const JobDetails = () => {
   const { jobId } = useRouteMatch().params
   const [loading, setLoading] = useState([])
   const [activeJobDetail, setState] = useState('')
-  const dispatch = useDispatch()
   const history = useHistory()
 
   const palletItems = [
@@ -39,7 +33,7 @@ const JobDetails = () => {
   return (
     <Container>
       <SectionHeader
-        title={`Jobs Name: ${activeJobDetail?.title}`}
+        title={`Jobs Name: ${activeJobDetail ? activeJobDetail?.title : ''}`}
         links={[
           { title: 'Jobs', link: AppRoute.dashboard.jobs.initial },
           {
@@ -56,7 +50,6 @@ const JobDetails = () => {
             >
               Edit Job
             </Button>
-            <Button>Publish Job</Button>
           </div>
         }
       />
@@ -83,12 +76,15 @@ const JobDetails = () => {
             loading,
             handleDeleteJob: (row) => {
               setLoading((s) => [...s, row.id])
-              dispatch(alterJobApplications({ id: row.id }, 'delete')).finally(
-                () => {
+              alterJobApplications({ id: row.id }, 'delete').then(() => {
+                getPostedJobDetail(jobId).then((response) => {
+                  if (response && response.data) {
+                    setState(response.data)
+                  }
                   setLoading((s) => s.filter((item) => item !== row.id))
-                },
-              )
-              history.push(`${AppRoute.dashboard.jobs.details}/${row.id}`)
+                  history.push(`${AppRoute.dashboard.jobs.details}/${row.id}`)
+                })
+              })
             },
           }),
           dataSource: activeJobDetail?.applications,

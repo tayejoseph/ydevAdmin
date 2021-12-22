@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Switch, Route, useHistory } from 'react-router-dom'
+import { message } from 'antd'
 import { Button } from '../../UI'
 import { getPostedJobs, alterJobPost } from '../../store/action'
 import { AppRoute } from '../../constants'
@@ -99,6 +100,7 @@ const Jobs = () => {
                   setLoading((s) => [...s, row.id])
                   dispatch(alterJobPost({ id: row.id }, 'delete')).finally(
                     () => {
+                      message.success('Successfull deleted posted job')
                       setLoading((s) => s.filter((item) => item !== row.id))
                     },
                   )

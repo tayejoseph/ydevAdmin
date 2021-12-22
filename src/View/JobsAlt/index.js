@@ -60,10 +60,13 @@ const JobsAlt = () => {
     }
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
     if (
-      formValidator(document.forms['job-form'].getElementsByTagName('input'))
+      formValidator([
+        ...document.forms['job-form'].getElementsByTagName('input'),
+        ...document.forms['job-form'].getElementsByTagName('textarea'),
+        ...document.forms['job-form'].getElementsByTagName('select'),
+      ])
     ) {
       setLoading(true)
       try {
@@ -86,15 +89,26 @@ const JobsAlt = () => {
     <Container>
       <SectionHeader
         title="JobsAlt"
-        links={[
-          { title: 'JobsAlt', link: AppRoute.dashboard.jobs.details },
-          {
-            title: 'Alt Job',
-            link: `${AppRoute.dashboard.jobs.details}/${action}`,
-          },
-        ]}
+        links={
+          action !== 'new'
+            ? [
+                { title: 'Jobs', link: AppRoute.dashboard.jobs.initial },
+                {
+                  title: 'Alt Job',
+                  link: `${AppRoute.dashboard.jobs.details}/${action}`,
+                },
+              ]
+            : [{ title: 'Jobs', link: AppRoute.dashboard.jobs.initial }]
+        }
       />
-      <form name="job-form" onSubmit={handleSubmit} noValidate>
+      <form
+        name="job-form"
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSubmit()
+        }}
+        noValidate
+      >
         <section className="top--section">
           <InputGroup
             label="Job Title"

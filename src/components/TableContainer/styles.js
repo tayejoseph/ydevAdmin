@@ -1,4 +1,5 @@
 import Styled from 'styled-components'
+import { rgba } from 'polished'
 import { minQuery } from '../../helpers'
 
 export default Styled.div`
@@ -14,9 +15,6 @@ export default Styled.div`
             font-weight: 600;
         }
     }
-    button {
-        cursor: pointer;
-    }
     div.table--grid__container {
         display: grid;
         grid-gap: 1em;
@@ -28,9 +26,48 @@ export default Styled.div`
         div.header--action {
             display: flex;
             align-items: center;
+            position: relative;
             grid-gap: 0.5em;
             p {
                 font-size: 0.9rem;
+            }
+            button.display--btn {
+                display: flex;
+                padding: 0.5em;
+                padding-right: 0.9em;
+                padding-left: 0.9em;
+                align-items: center;
+                grid-gap: 0.5em;
+                span {
+                    transition: 0.7s;
+                    &.spin {
+                        transform: rotate(180deg);
+                    }
+                    .icon {
+                        transform: scale(1.4);
+                    }
+                }
+            }
+            div.menu--lists {
+                position: absolute;
+                top: 3rem;
+                background: #fff;
+                box-shadow: 0px 4px 20px rgba(163, 168, 190, 0.4);
+                border-radius: 6px;
+                width: 10rem;
+                left: 0px;
+                z-index: 999;
+                button {
+                    display: block;
+                    border: none;
+                    background: transparent;
+                    padding: 1em;
+                    width: 100%;
+                    cursor: pointer;
+                    &:hover, &:focus {
+                        background: ${rgba('#0000', 0)};
+                    }
+                }
             }
         }
         form {
@@ -43,6 +80,7 @@ export default Styled.div`
                 justify-content: flex-end;
             }
             div.input--container {
+             
                 input {    
                     flex: 1;
                     width: 100%;
@@ -81,22 +119,12 @@ export default Styled.div`
         div.ant-table-wrapper {
             min-width: 50rem;
         }
-        ul.help--detail {
-            margin: 0px;
-            padding: 0px;
-            li {
-                text-align: left;
-            }
-        }
-        .help--detail {
-            text-align: left;
-        }
     }
 
     div.action--container {
         display: flex;
-        justify-content: center;
         grid-gap: 1em;
+        justify-content: center;
         svg {
             font-size: 1.2rem;
         }
@@ -109,12 +137,20 @@ export default Styled.div`
         font-size: 0.9rem;
     }
 
-    .badge--success {
+    .badge--success, .badge--paid {
         background: rgba(0, 194, 83, 0.1);
         border-radius: 2px;
         color: #00C253;
         font-size: 0.8rem;
         padding: 0.5em;
+    }
+    .badge--pending {
+        background: ${rgba('#FFE602', 0.5)};
+        border-radius: 2px;
+        color: black;
+        font-size: 0.8rem;
+        padding: 0.5em;
+        text-transform: capitalize;
     }
     .badge--failed {
         background: rgba(255, 0, 0, 0.1);
@@ -122,5 +158,15 @@ export default Styled.div`
         color: #FF0000;
         font-size: 0.8rem;
         padding: 0.5em;
+    }
+    div.status--container {
+        display: flex;
+        align-items: center;
+        /* background: #FFE602; */
+        border-radius: 16px;
+        width: fit-content;
+        grid-gap: 0.5em;
+        font-size: 0.8rem;
+        padding: 0.25em 1em; 
     }
 `

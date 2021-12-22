@@ -14,17 +14,17 @@ export const columns = ({
     dataIndex: 'title',
     key: 'title',
   },
-  {
-    title: 'Job Type',
-    dataIndex: 'job_type',
-    key: 'job_type',
-  },
-  {
-    title: 'Job Location',
-    dataIndex: 'location',
-    key: 'location',
-    align: 'center',
-  },
+  // {
+  //   title: 'Job Type',
+  //   dataIndex: 'job_type',
+  //   key: 'job_type',
+  // },
+  // {
+  //   title: 'Job Location',
+  //   dataIndex: 'location',
+  //   key: 'location',
+  //   align: 'center',
+  // },
   // {
   //   title: 'Publish',
   //   align: 'center',

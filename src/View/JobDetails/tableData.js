@@ -1,5 +1,6 @@
 import { Button } from '../../UI'
 import { BsTrash } from 'react-icons/bs'
+import { GrLink } from 'react-icons/gr'
 import { AiOutlineLinkedin, AiOutlineGlobal } from 'react-icons/ai'
 
 export const columns = ({ handleDeleteJob, loading }) => [
@@ -14,9 +15,16 @@ export const columns = ({ handleDeleteJob, loading }) => [
     key: 'email',
   },
   {
-    title: 'Role',
-    dataIndex: 'role',
-    key: 'role',
+    title: 'Resume',
+    dataIndex: 'resume',
+    key: 'resume',
+    align: 'center',
+    render: (resume) =>
+      resume && (
+        <Button icon onClick={() => window.open(resume, '_blank')}>
+          <GrLink />
+        </Button>
+      ),
   },
   {
     title: 'Links',

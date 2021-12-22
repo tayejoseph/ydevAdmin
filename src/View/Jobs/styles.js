@@ -51,4 +51,7 @@ export default Styled.div`
             }
         }
     }
+    div.custom--container {
+        max-width: 50rem;
+    }
 `

@@ -16,7 +16,7 @@ const Consultation = () => {
 
   const palletItems = [
     {
-      title: 'Total Alumini',
+      title: 'Total Consultation',
       value: consultationLists ? consultationLists.length : 0,
     },
   ]
@@ -27,7 +27,7 @@ const Consultation = () => {
 
   return (
     <Container>
-      <SectionHeader title="Cooperate Training" links={[]} />
+      <SectionHeader title="Consultations" links={[]} />
       <div className="pallet--grid__container">
         {palletItems.map((item) => (
           <div className="pallet--item">
