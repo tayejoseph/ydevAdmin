@@ -1,6 +1,7 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useTheme } from 'styled-components'
-import moment from "moment"
+import { toMoney } from '../../helpers'
 import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { AppRoute } from '../../constants'
 import {
@@ -12,6 +13,7 @@ import {
 import Container from './styles'
 
 const DashHome = () => {
+  const { dashboardData } = useSelector((state) => state.AppReducer)
   const theme = useTheme()
   return (
     <Container>
@@ -27,44 +29,25 @@ const DashHome = () => {
         />
         <div className="grid--container">
           <DashPallet
-            title={'TOTAL Response'}
+            title={'Total Earnings'}
             icon={<HiOutlineMenuAlt3 />}
-            value={'5.5k'}
+            value={toMoney(dashboardData?.total_earnings || 0, true)}
             bgColor={'#28C76F'}
-          />
-          <DashPallet
-            title={'ALL EARNINGS'}
-            bgColor={theme.primary}
-            value={'NGN 80,000'}
           />
           <DashPallet
             title={'TOTAL FOLLOWUP'}
             bgColor={'#021F4F'}
-            value={'5.5k'}
+            value={toMoney(dashboardData?.follow_ups || 0, true)}
+          />
+          <DashPallet
+            title={'Total Response'}
+            bgColor={theme.primary}
+            value={toMoney(dashboardData?.total_response || 0, true)}
           />
         </div>
       </header>
       <div className="page--content">
-        <PalletItem title="Recent Activities" className = "activities--container">
-        <div className ="active--trail">
-        {[...Array(10).keys()].map((item) => (
-           <div className="recent--activity" key={item}>
-              <p className="u--typo__caption--small">Sign Up</p>
-              <div>
-                <p
-                  className="u--typo__caption--small"
-                  style={{ whiteSpace: 'pre-line', textAlign: 'right' }}
-                >
-                  {moment(new Date())
-                    .format('MMMM Do YYYY, h:mm:ss a')
-                    .replace(',', '\n')}
-                </p>
-              </div>
-            </div>
-        ))}
-        </div>
-        </PalletItem>
-        <PalletItem title="Total Interest Outstanding Open Loans - Monthly">
+        <PalletItem title="Earnings">
           <LineGraph />
         </PalletItem>
       </div>

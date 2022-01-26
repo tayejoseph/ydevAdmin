@@ -12,6 +12,8 @@ const Types = {
   altInstructor: 'ALT_INSTRUCTOR',
   altCooperateTraining: 'ALT_TRAINING',
   altConsultation: 'ALT_CONSULTATION',
+  altPayment: 'ALT_PAYMENT',
+  altDashboard: 'ALT_DASHBOARD',
 }
 
 export default Types

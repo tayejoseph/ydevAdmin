@@ -45,6 +45,9 @@ const App = () => {
                 <Redirect to={AppRoute.auth.signIn} />
               )}
             </Route>
+            <Route path={'*'}>
+              <Redirect to={AppRoute.auth.signIn} />
+            </Route>
           </Switch>
         </div>
         <ScrollToTop />

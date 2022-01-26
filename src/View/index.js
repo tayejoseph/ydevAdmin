@@ -1,6 +1,7 @@
 export { default as Auth } from './Auth'
 export { default as Dashboard } from './Dashboard'
 export { default as DashHome } from './DashHome'
+export { default as Payment } from './Payments'
 // export { default as Repayment } from './Repayment'
 
 // In use

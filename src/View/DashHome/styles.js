@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import {rgba} from "polished"
+import { rgba } from 'polished'
 import { minQuery } from '../../helpers'
 
 export default Styled.div`
@@ -21,10 +21,10 @@ export default Styled.div`
         grid-gap: 1.5em;
         grid-template-columns: 1fr;
         ${minQuery('md')} {
-            grid-template-columns: 1fr 1fr;
+            /* grid-template-columns: 1fr 1fr;
             div.full--span {
                 grid-column: 1 / 3;
-            }
+            } */
         }
         div.activities--container {
             div.content--container {
@@ -37,7 +37,7 @@ export default Styled.div`
             padding-top: 1em;
             padding-right: 1em;
             overflow-y: auto;
-            ${({theme}) => theme.mixins.scrollbar};
+            ${({ theme }) => theme.mixins.scrollbar};
             div.recent--activity {
                 display: flex;
                 justify-content: space-between;
@@ -67,7 +67,8 @@ export default Styled.div`
                         left: 0.25em;
                         top: 60%;
                         position: absolute;
-                        background-color: ${({ theme }) => rgba(theme.primary, 0.1)};
+                        background-color: ${({ theme }) =>
+                          rgba(theme.primary, 0.1)};
                     }
                 }
                 p {

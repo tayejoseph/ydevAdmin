@@ -1,20 +1,25 @@
 import { v4 as uuid } from 'uuid'
+import moment from 'moment'
+import { toMoney } from '../../helpers'
 
 export const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Program',
+    dataIndex: 'program',
+    key: 'program',
+    render: (item) => (item ? item.replace('_', ' ') : ''),
   },
   {
-    title: 'Location',
-    dataIndex: 'location',
-    key: 'location',
+    title: 'Amount',
+    dataIndex: 'amount',
+    key: 'amount',
+    render: (item) => toMoney(item),
   },
   {
-    title: 'Student',
+    title: 'Date',
     dataIndex: 'student',
     key: 'student',
+    render: (item) => moment(item).format('MMM Do YY'),
   },
 ]
 export const dataSource = [...Array(10).keys()].map((item, index) => ({

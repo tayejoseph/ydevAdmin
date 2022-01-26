@@ -32,6 +32,21 @@ export const getUserDetails = (data) => async (dispatch, getState) => {
   }
 }
 
+export const getDashboardData = () => async (dispatch, getState) => {
+  try {
+    const { status, data: response, ...rest } = await axios.get('dashboard')
+    console.log({ status, response, ...rest }, 'sdljksdskdj')
+    if (status === 200) {
+      dispatch({
+        type: TYPES.altDashboard,
+        data: response,
+      })
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
 export const handleSignIn = (data) => async (dispatch, getState) => {
   try {
     const { status, data: response, ...rest } = await axios.post(
@@ -44,6 +59,7 @@ export const handleSignIn = (data) => async (dispatch, getState) => {
       Cookies.set('token', response.access_token)
       message.success('Logged in successfully')
       dispatch(altAuthState(true))
+      dispatch(getDashboardData())
     }
   } catch ({ response }) {
     handleError(response)

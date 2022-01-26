@@ -14,6 +14,8 @@ const initState = {
   applications: '',
   instructorsLists: '',
   consultationLists: '',
+  paymentLists: '',
+  dashboardData: '',
 }
 
 const UserReducer = (state = initState, action) => {
@@ -31,6 +33,11 @@ const UserReducer = (state = initState, action) => {
       return {
         ...state,
         programLists: data,
+      }
+    case TYPES.altDashboard:
+      return {
+        ...state,
+        dashboardData: data,
       }
     case TYPES.altInstructor:
       return {
@@ -76,6 +83,11 @@ const UserReducer = (state = initState, action) => {
       return {
         ...state,
         consultationLists: data,
+      }
+    case TYPES.altPayment:
+      return {
+        ...state,
+        paymentLists: data,
       }
     default:
       return state

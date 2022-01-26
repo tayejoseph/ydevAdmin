@@ -17,8 +17,8 @@ const LineGraph = () => {
       <AreaChart
         data={[...Array(10).keys()].map((item) => ({
           name: 'Aug',
-          uv: item,
-          pv: 2400,
+          // uv: item,
+          // pv: 2400,
           amt: 2400,
         }))}
         margin={{ top: 20, right: 30, left: -20, bottom: 0 }}

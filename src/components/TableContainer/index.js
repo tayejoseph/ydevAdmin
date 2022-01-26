@@ -12,6 +12,7 @@ const TableContainer = ({
   columns,
   className,
   rowContent,
+  hasDate,
   ...props
 }) => {
   const popUpTimeout = useRef(null)
@@ -58,41 +59,44 @@ const TableContainer = ({
       </header>
       <div className="table--grid__container">
         <div className="header--action">
-          <p>Show</p>
-          <div
-            className="menu--container"
-            onFocus={() => {
-              clearTimeout(popUpTimeout.current)
-            }}
-            onBlur={popupBlurHandler}
-          >
-            <Button
-              className={`display--btn`}
-              onClick={() => {
-                setDisplay(!showMenu)
+          {/* <div className="col-1">
+            <p>Show</p>
+            <div
+              className="menu--container"
+              onFocus={() => {
+                clearTimeout(popUpTimeout.current)
               }}
-              aria-haspopup="true"
-              aria-expanded={showMenu}
+              onBlur={popupBlurHandler}
             >
-              {noPerPage}{' '}
-              <span className={`${showMenu ? 'spin' : ''}`}>
-                <RiArrowDownSLine />
-              </span>
-            </Button>
-            {showMenu && (
-              <div className="menu--lists">
-                {[...Array(10).keys()].map((item) =>
-                  item % 2 === 0 && item !== 0 ? (
-                    <button onClick={() => setNoPerPage(item)} key={item}>
-                      {item}
-                    </button>
-                  ) : null,
-                )}
-              </div>
-            )}
-          </div>
+              <Button
+                className={`display--btn`}
+                onClick={() => {
+                  setDisplay(!showMenu)
+                }}
+                aria-haspopup="true"
+                aria-expanded={showMenu}
+              >
+                {noPerPage}{' '}
+                <span className={`${showMenu ? 'spin' : ''}`}>
+                  <RiArrowDownSLine />
+                </span>
+              </Button>
+              {showMenu && (
+                <div className="menu--lists">
+                  {[...Array(10).keys()].map((item) =>
+                    item % 2 === 0 && item !== 0 ? (
+                      <button onClick={() => setNoPerPage(item)} key={item}>
+                        {item}
+                      </button>
+                    ) : null,
+                  )}
+                </div>
+              )}
+            </div>
 
-          <p>Entries</p>
+            <p>Entries</p>
+          </div>
+          <div className="col-2">{hasDate && <input type="date" />}</div> */}
         </div>
         <form
           noValidate

@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Switch, useLocation } from 'react-router-dom'
 import {
   DashHome,
@@ -14,13 +15,16 @@ import {
   CooperateTraining,
   Instructors,
   Consultation,
+  Payment,
 } from '../'
 import { AppRoute, dashboardConstant } from '../../constants'
+import { getDashboardData } from '../../store/action'
 import TopNav from './TopNav'
 import DashSideNav from './DashSideNav'
 import Container from './styles'
 
 const Dashboard = () => {
+  const dispatch = useDispatch()
   const [showNav, setDisplay] = useState(false)
   const contentContainerRef = useRef(null)
   const { pathname } = useLocation()
@@ -32,6 +36,10 @@ const Dashboard = () => {
       behavior: 'smooth',
     })
   }, [pathname])
+
+  useEffect(() => {
+    dispatch(getDashboardData())
+  }, [dispatch])
 
   return (
     <Container>
@@ -100,6 +108,10 @@ const Dashboard = () => {
             <Route
               path={AppRoute.dashboard.cooperateTraining.initial}
               component={CooperateTraining}
+            />
+            <Route
+              path={AppRoute.dashboard.payment.initial}
+              component={Payment}
             />
           </Switch>
         </div>

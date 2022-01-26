@@ -32,6 +32,10 @@ const DashSideNav = () => {
           <RiCalendarEventLine />
           <span>Events</span>
         </NavLink>
+        <NavLink className="menu" to={AppRoute.dashboard.payment.initial}>
+          <RiCalendarEventLine />
+          <span>Payment</span>
+        </NavLink>
         <hr />
         <NavLink className="menu" to={AppRoute.dashboard.alumini.initial}>
           <IoMdContacts />

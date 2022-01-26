@@ -26,25 +26,30 @@ export default Styled.div`
         div.header--action {
             display: flex;
             align-items: center;
-            position: relative;
-            grid-gap: 0.5em;
-            p {
-                font-size: 0.9rem;
-            }
-            button.display--btn {
+            grid-gap: 1.5em;
+            div.col-1 {
                 display: flex;
-                padding: 0.5em;
-                padding-right: 0.9em;
-                padding-left: 0.9em;
                 align-items: center;
+                position: relative;
                 grid-gap: 0.5em;
-                span {
-                    transition: 0.7s;
-                    &.spin {
-                        transform: rotate(180deg);
-                    }
-                    .icon {
-                        transform: scale(1.4);
+                p {
+                    font-size: 0.9rem;
+                }
+                button.display--btn {
+                    display: flex;
+                    padding: 0.5em;
+                    padding-right: 0.9em;
+                    padding-left: 0.9em;
+                    align-items: center;
+                    grid-gap: 0.5em;
+                    span {
+                        transition: 0.7s;
+                        &.spin {
+                            transform: rotate(180deg);
+                        }
+                        .icon {
+                            transform: scale(1.4);
+                        }
                     }
                 }
             }

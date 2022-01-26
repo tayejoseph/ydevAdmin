@@ -1,37 +1,50 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import { AppRoute, schoolListMenu } from '../../constants'
 import { InputGroup } from '../../UI'
 import { UsersPallet } from '../../asset/convertedSvg'
+import { toMoney } from '../../helpers'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
+import { getEarnings } from '../../store/action'
 import Container from './styles'
 
-const palletItems = [
-  { title: 'Total Response', value: '5.5k' },
-  { title: 'All Earnings', value: '2.5k' },
-  { title: 'Total Follow Up', value: '40' },
-]
-
-
-const Schools = () => {
+const Payment = () => {
+  const { paymentLists } = useSelector((state) => state.AppReducer)
+  const dispatch = useDispatch()
   const history = useHistory()
+
+  useEffect(() => {
+    dispatch(getEarnings())
+  }, [dispatch])
+
+  const palletItems = [
+    {
+      title: 'Total Earnings',
+      value: toMoney(paymentLists.total_earnings || 0, true),
+    },
+  ]
+
+  console.log({ paymentLists })
   return (
     <Switch>
-      <Route path={AppRoute.dashboard.repayment.inital} exact>
+      <Route path={AppRoute.dashboard.payment.inital} exact>
         <Container>
           <SectionHeader
             title="Earnings"
             links={[]}
-            children={
-              <InputGroup>
-              <select>
-              {schoolListMenu.map((item) => (
-                <option value = {item.title} key = {item.title}>{item.title}</option>
-              ))}
-              </select>
-              </InputGroup>
-            }
+            // children={
+            //   <InputGroup>
+            //     <select>
+            //       {schoolListMenu.map((item) => (
+            //         <option value={item.title} key={item.title}>
+            //           {item.title}
+            //         </option>
+            //       ))}
+            //     </select>
+            //   </InputGroup>
+            // }
           />
           <div className="pallet--grid__container">
             {palletItems.map((item) => (
@@ -51,12 +64,13 @@ const Schools = () => {
             {...{
               title: 'Earning Lists',
               columns,
-              dataSource,
+              // hasDate: true,
+              dataSource: paymentLists.earnings,
               onRow: (record, rowIndex) => {
                 return {
                   onClick: (event) => {
                     history.push(
-                      `${AppRoute.dashboard.repayment.initial}/${record.key}?tab=accounts`,
+                      `${AppRoute.dashboard.payment.initial}/${record.key}?tab=accounts`,
                     )
                   },
                 }
@@ -69,4 +83,4 @@ const Schools = () => {
   )
 }
 
-export default Schools
+export default Payment
