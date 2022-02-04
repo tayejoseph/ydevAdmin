@@ -22,11 +22,10 @@ const Payment = () => {
   const palletItems = [
     {
       title: 'Total Earnings',
-      value: toMoney(paymentLists.total_earnings || 0, true),
+      value: toMoney(paymentLists?.total_earnings || 0, true),
     },
   ]
 
-  console.log({ paymentLists })
   return (
     <Switch>
       <Route path={AppRoute.dashboard.payment.inital} exact>
@@ -65,7 +64,7 @@ const Payment = () => {
               title: 'Earning Lists',
               columns,
               // hasDate: true,
-              dataSource: paymentLists.earnings,
+              dataSource: paymentLists?.earnings,
               onRow: (record, rowIndex) => {
                 return {
                   onClick: (event) => {
