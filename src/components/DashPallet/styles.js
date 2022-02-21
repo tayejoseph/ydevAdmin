@@ -5,6 +5,7 @@ export default Styled.div`
     box-shadow: 0px 0px 97.9127px rgba(0, 0, 0, 0.05);
     border-radius: 12.5299px;
     padding: 1em;
+    padding-bottom: 3em;
     div {
         display: flex;
         justify-content: space-between;

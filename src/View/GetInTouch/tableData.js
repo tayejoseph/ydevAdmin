@@ -55,17 +55,3 @@ export const columns = ({ handleDeleteMentor, loading }) => [
     ),
   },
 ]
-
-export const dataSource = [
-  {
-    first_name: 'string',
-    last_name: 'string',
-    email: 'user@example.com',
-    subject: 'string',
-    company_url: 'string',
-    phone_number: 'string',
-    message: 'string',
-    id: 0,
-    uploadAt: '2021-11-06T12:33:01.948Z',
-  },
-]

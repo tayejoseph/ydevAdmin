@@ -1,5 +1,5 @@
 import { FiEye } from 'react-icons/fi'
-import { Button, Spinner } from '../../UI'
+import { Button } from '../../UI'
 import { Edit, Delete } from '../../asset/convertedSvg'
 
 export const columns = ({

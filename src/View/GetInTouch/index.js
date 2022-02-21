@@ -5,7 +5,7 @@ import { getContacts, alterContacts } from '../../store/action'
 import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
-import { columns, dataSource } from './tableData'
+import { columns } from './tableData'
 import Container from './styles'
 
 const Contacts = () => {

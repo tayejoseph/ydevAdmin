@@ -58,14 +58,3 @@ export const columns = ({ handleDeleteAlumini, loading }) => [
     ),
   },
 ]
-
-export const dataSource = [
-  {
-    full_name: 'string',
-    email: 'user@example.com',
-    organization_name: 'string',
-    support_info: 'string',
-    id: 0,
-    uploadAt: '2021-11-06T12:33:01.948Z',
-  },
-]

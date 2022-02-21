@@ -20,6 +20,12 @@ export default Styled.div`
         margin-top: 3em;
         grid-gap: 1.5em;
         grid-template-columns: 1fr;
+
+        div.graph-header {
+            div.input--group {
+                margin: 0px;
+            }
+        }
         ${minQuery('md')} {
             /* grid-template-columns: 1fr 1fr;
             div.full--span {

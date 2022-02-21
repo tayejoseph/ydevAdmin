@@ -17,25 +17,9 @@ export const logOutHander = () => ({
   type: TYPES.clearState,
 })
 
-export const getUserDetails = (data) => async (dispatch, getState) => {
-  try {
-    const { status, data: response, ...rest } = await axios.get(
-      '/api/v1/auth/user',
-    )
-    console.log({ status, response, ...rest }, 'sdljksdskdj')
-    if (status === 200) {
-      dispatch(altUserDetails(response.data))
-    }
-    console.log(response, 'Sdjskdskj')
-  } catch ({ response }) {
-    handleError(response)
-  }
-}
-
 export const getDashboardData = () => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.get('dashboard')
-    console.log({ status, response, ...rest }, 'sdljksdskdj')
+    const { status, data: response } = await axios.get('dashboard')
     if (status === 200) {
       dispatch({
         type: TYPES.altDashboard,
@@ -49,19 +33,19 @@ export const getDashboardData = () => async (dispatch, getState) => {
 
 export const handleSignIn = (data) => async (dispatch, getState) => {
   try {
-    const { status, data: response, ...rest } = await axios.post(
-      '/user/login',
-      data,
-    )
-    console.log({ response, rest, status }, 'NnNNNN')
+    const { status, data: response } = await axios.post('/user/login', data)
     if (status === 200) {
-      axios.defaults.headers.common.Authorization = `Bearer ${response.access_token}`
-      Cookies.set('token', response.access_token)
+      axios.defaults.headers.common[
+        'Authorization'
+      ] = `${response.token_type} ${response.access_token}`
+
+      Cookies.set('ydev_token', JSON.stringify(response))
       message.success('Logged in successfully')
       dispatch(altAuthState(true))
       dispatch(getDashboardData())
     }
   } catch ({ response }) {
+    console.log({ response })
     handleError(response)
   }
 }

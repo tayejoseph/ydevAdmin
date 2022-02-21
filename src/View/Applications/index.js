@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { getApplications, altApplication } from '../../store/action'
-import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
 import { SectionHeader, TableContainer } from '../../components'
 import { columns } from './tableData'
@@ -12,7 +10,6 @@ const Application = () => {
   const [loading, setLoading] = useState([])
   const { applications } = useSelector((s) => s.AppReducer)
   const dispatch = useDispatch()
-  const history = useHistory()
 
   const palletItems = [
     {

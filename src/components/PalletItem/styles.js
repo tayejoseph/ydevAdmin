@@ -1,4 +1,5 @@
 import Styled from 'styled-components'
+import { maxQuery } from '../../helpers'
 
 export default Styled.div`
     background: #FFFFFF;
@@ -7,12 +8,21 @@ export default Styled.div`
     h1 {
         font-size: 1rem;
         color: #021F4F;
-        padding: 0.5em 1em;
         font-weight: 600;
-        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
     }
     div.content--container {
         padding: 1em;
         height: 20rem;
+    }
+    header.palletItem-header {
+        display: flex;
+        grid-gap: 1em;
+        padding: 0.8em 1em;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+        ${maxQuery('md')} {
+            flex-direction: column;
+        }
     }
 `

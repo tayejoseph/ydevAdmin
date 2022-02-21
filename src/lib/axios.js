@@ -10,8 +10,13 @@ const server = axios.create({
 })
 
 server.interceptors.request.use((config) => {
-  const token = Cookies.get('token')
-  if (token) config.headers.Authorization = `Bearer ${token}`
+  const tokenData = Cookies.get('ydev_token')
+    ? JSON.parse(Cookies.get('ydev_token'))
+    : null
+
+  if (tokenData) {
+    config.headers.Authorization = `${tokenData.token_type} ${tokenData.access_token}`
+  }
   return config
 })
 
@@ -22,11 +27,12 @@ server.interceptors.response.use(
   (err) => {
     const state = store.getState()
     if (err && err.response) {
+      console.log({ response: err.response })
       if (
         (err.response.status === 403 || err.response.status === 401) &&
         state.AuthReducer.authenticated
       ) {
-        Cookies.remove('token')
+        Cookies.remove('ydev_token')
         message.warning('Your Session has Expired kindly Login again')
         setTimeout(() => {
           store.dispatch(logOutHander())

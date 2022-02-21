@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { useRouteMatch, useHistory } from 'react-router-dom'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { AppRoute } from '../../../constants'
 import { TableContainer } from '../../../components'
 import { columns, dataSource } from './tableData'
-import { Button, InputGroup } from '../../../UI'
 import Container from './styles'
 
 const Partenerships = () => {

@@ -66,7 +66,7 @@ const Schools = () => {
                 ]
               : palletItems
             ).map((item) => (
-              <div className="pallet--item">
+              <div className="pallet--item" key={item.title}>
                 <h1>{item.value}</h1>
                 <div>
                   <p>{item.title}</p>

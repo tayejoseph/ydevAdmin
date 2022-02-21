@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Table } from 'antd'
-import { RiArrowDownSLine } from 'react-icons/ri'
 import { CSVLink } from 'react-csv'
-import { Button } from '../../UI'
 import Container from './styles'
 
 const TableContainer = ({
@@ -15,9 +13,6 @@ const TableContainer = ({
   hasDate,
   ...props
 }) => {
-  const popUpTimeout = useRef(null)
-  const [showMenu, setDisplay] = useState(false)
-  const [noPerPage, setNoPerPage] = useState(8)
   const [tableData, setTableData] = useState(dataSource || [])
   const [searchVal, setSearchVal] = useState('')
 
@@ -43,14 +38,9 @@ const TableContainer = ({
       )
 
       setTableData(searchedResult)
+      return
     }
   }, [searchVal, dataSource])
-
-  const popupBlurHandler = () => {
-    popUpTimeout.current = setTimeout(() => {
-      setDisplay(false)
-    })
-  }
 
   return (
     <Container className={`custom--container ${className}`}>
@@ -58,46 +48,7 @@ const TableContainer = ({
         <h1>{title}</h1>
       </header>
       <div className="table--grid__container">
-        <div className="header--action">
-          {/* <div className="col-1">
-            <p>Show</p>
-            <div
-              className="menu--container"
-              onFocus={() => {
-                clearTimeout(popUpTimeout.current)
-              }}
-              onBlur={popupBlurHandler}
-            >
-              <Button
-                className={`display--btn`}
-                onClick={() => {
-                  setDisplay(!showMenu)
-                }}
-                aria-haspopup="true"
-                aria-expanded={showMenu}
-              >
-                {noPerPage}{' '}
-                <span className={`${showMenu ? 'spin' : ''}`}>
-                  <RiArrowDownSLine />
-                </span>
-              </Button>
-              {showMenu && (
-                <div className="menu--lists">
-                  {[...Array(10).keys()].map((item) =>
-                    item % 2 === 0 && item !== 0 ? (
-                      <button onClick={() => setNoPerPage(item)} key={item}>
-                        {item}
-                      </button>
-                    ) : null,
-                  )}
-                </div>
-              )}
-            </div>
-
-            <p>Entries</p>
-          </div>
-          <div className="col-2">{hasDate && <input type="date" />}</div> */}
-        </div>
+        <div className="header--action"></div>
         <form
           noValidate
           onSubmit={(e) => {
@@ -125,7 +76,6 @@ const TableContainer = ({
             {...{
               dataSource: tableData,
               columns,
-              pagination: { pageSize: noPerPage },
               loading: tableData === '',
               ...props,
             }}
