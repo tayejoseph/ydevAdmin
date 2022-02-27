@@ -51,4 +51,7 @@ export default Styled.div`
             }
         }
     }
+    div.help--detail {
+        width: 30rem;
+    }
 `

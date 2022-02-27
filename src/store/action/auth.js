@@ -19,7 +19,7 @@ export const logOutHander = () => ({
 
 export const getDashboardData = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('dashboard')
+    const { status, data: response } = await axios.get('dashboard/')
     if (status === 200) {
       dispatch({
         type: TYPES.altDashboard,

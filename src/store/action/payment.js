@@ -9,7 +9,7 @@ const altPayment = (data) => ({
 
 export const getEarnings = () => async (dispatch, getState) => {
   try {
-    const { status, data: response } = await axios.get('earnings')
+    const { status, data: response } = await axios.get('earnings/')
     if (status === 200) {
       dispatch(altPayment(response))
     }

@@ -41,11 +41,13 @@ const DashHome = () => {
 
     getDashboardGraph({ month })
       .then((response) => {
-        const { data } = response
-        setGraph((s) => ({
-          ...s,
-          month: data.month,
-        }))
+        if (response) {
+          const { data } = response
+          setGraph((s) => ({
+            ...s,
+            month: data.month,
+          }))
+        }
       })
       .finally(() => {
         setLoading((s) => ({
@@ -63,11 +65,13 @@ const DashHome = () => {
 
     getDashboardGraph({ year })
       .then((response) => {
-        const { data } = response
-        setGraph((s) => ({
-          ...s,
-          year: data.year,
-        }))
+        if (response) {
+          const { data } = response
+          setGraph((s) => ({
+            ...s,
+            year: data.year,
+          }))
+        }
       })
       .finally(() => {
         setLoading((s) => ({
