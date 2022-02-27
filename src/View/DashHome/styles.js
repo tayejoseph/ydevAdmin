@@ -83,5 +83,27 @@ export default Styled.div`
             }
         }
     }
-
+    div.loading-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    div.empty-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        flex-direction: column;
+        svg {
+            font-size: 4rem;
+        }
+        p {
+            font-size: 0.9rem;
+            line-height: 110%;
+            margin-top: 1em;
+            max-width: 18rem;
+            text-align: center
+        }
+    }
 `

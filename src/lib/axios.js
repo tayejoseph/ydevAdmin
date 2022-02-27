@@ -10,11 +10,10 @@ const server = axios.create({
 })
 
 server.interceptors.request.use((config) => {
-  const tokenData = Cookies.get('ydev_token')
-    ? JSON.parse(Cookies.get('ydev_token'))
-    : null
+  let tokenData = Cookies.get('ydev_token')
 
   if (tokenData) {
+    tokenData = JSON.parse(tokenData)
     config.headers.Authorization = `${tokenData.token_type} ${tokenData.access_token}`
   }
   return config

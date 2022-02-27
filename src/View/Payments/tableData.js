@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import moment from 'moment'
-import { toMoney } from '../../helpers'
+import abbreviate from 'number-abbreviate'
 
 export const columns = [
   {
@@ -13,7 +13,7 @@ export const columns = [
     title: 'Amount',
     dataIndex: 'amount',
     key: 'amount',
-    render: (item) => toMoney(item),
+    render: (item) => abbreviate(item),
   },
   {
     title: 'Date',

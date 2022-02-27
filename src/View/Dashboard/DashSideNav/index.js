@@ -6,7 +6,12 @@ import { FaChalkboardTeacher, FaUserGraduate } from 'react-icons/fa'
 import { GiTeacher } from 'react-icons/gi'
 import { BiConversation } from 'react-icons/bi'
 import { GoBriefcase } from 'react-icons/go'
-import { RiCalendarEventLine, RiMailAddFill, RiGuideLine } from 'react-icons/ri'
+import {
+  RiCalendarEventLine,
+  RiSecurePaymentFill,
+  RiMailAddFill,
+  RiGuideLine,
+} from 'react-icons/ri'
 import { IoMdContacts } from 'react-icons/io'
 import { AppRoute } from '../../../constants'
 import { YdevIllustration } from '../../../components'
@@ -33,7 +38,7 @@ const DashSideNav = () => {
           <span>Events</span>
         </NavLink>
         <NavLink className="menu" to={AppRoute.dashboard.payment.initial}>
-          <RiCalendarEventLine />
+          <RiSecurePaymentFill />
           <span>Payment</span>
         </NavLink>
         <hr />

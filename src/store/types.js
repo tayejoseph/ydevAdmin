@@ -14,6 +14,7 @@ const Types = {
   altConsultation: 'ALT_CONSULTATION',
   altPayment: 'ALT_PAYMENT',
   altDashboard: 'ALT_DASHBOARD',
+  altDashboardGraph: 'ALT_DASHBOARD_GRAPH',
 }
 
 export default Types

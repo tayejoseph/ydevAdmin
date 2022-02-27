@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Switch, Route, useHistory } from 'react-router-dom'
+import abbreviate from 'number-abbreviate'
 import { AppRoute } from '../../constants'
 import { UsersPallet } from '../../asset/convertedSvg'
-import { toMoney } from '../../helpers'
 import { SectionHeader, TableContainer } from '../../components'
 import { columns } from './tableData'
 import { getEarnings } from '../../store/action'
@@ -21,7 +21,7 @@ const Payment = () => {
   const palletItems = [
     {
       title: 'Total Earnings',
-      value: toMoney(paymentLists?.total_earnings || 0, true),
+      value: abbreviate(paymentLists?.total_earnings || 0, true),
     },
   ]
 

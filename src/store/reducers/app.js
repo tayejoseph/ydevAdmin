@@ -16,10 +16,14 @@ const initState = {
   consultationLists: '',
   paymentLists: '',
   dashboardData: '',
+  dashboardGraph: {
+    monthlyEarning: null,
+    yearlyEarning: null,
+  },
 }
 
 const UserReducer = (state = initState, action) => {
-  const { type, data } = action
+  const { type, data, actionType } = action
 
   switch (type) {
     case TYPES.clearState:
@@ -28,6 +32,14 @@ const UserReducer = (state = initState, action) => {
       return {
         ...state,
         trainingLists: data,
+      }
+    case TYPES.altDashboardGraph:
+      return {
+        ...state,
+        dashboardGraph: {
+          ...state.dashboardGraph,
+          [actionType]: data,
+        },
       }
     case TYPES.altPrograms:
       return {

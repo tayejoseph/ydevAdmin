@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import abbreviate from 'number-abbreviate'
 import { AppRoute, schoolListMenu } from '../../constants'
 import { InputGroup } from '../../UI'
 import { getPrograms } from '../../store/action'
@@ -61,7 +62,7 @@ const Schools = () => {
                   ...palletItems,
                   {
                     title: `Total ${activeSchool.split('-')[1]} Applicants `,
-                    value: activeSchoolData.length,
+                    value: abbreviate(activeSchoolData.length),
                   },
                 ]
               : palletItems

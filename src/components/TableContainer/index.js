@@ -26,7 +26,7 @@ const TableContainer = ({
     if (searchVal) {
       const searchedResult = []
       dataSource.map((item) =>
-        Object.entries(item).map((data) => {
+        Object.entries(item).forEach((data) => {
           if (
             data[1] &&
             typeof data[1] === 'string' &&

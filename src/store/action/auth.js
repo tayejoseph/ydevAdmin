@@ -31,6 +31,18 @@ export const getDashboardData = () => async (dispatch, getState) => {
   }
 }
 
+export const getDashboardGraph = async ({ month, year }) => {
+  let url = `dashboard/graph?`
+
+  try {
+    url += month ? `month=${month}` : `year=${year}`
+
+    return await axios.get(url)
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
 export const handleSignIn = (data) => async (dispatch, getState) => {
   try {
     const { status, data: response } = await axios.post('/user/login', data)

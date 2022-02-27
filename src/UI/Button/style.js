@@ -68,6 +68,11 @@ export default styled.button`
           background: transparent;
           border-color: transparent;
         }
+        &:disabled {
+          background: transparent !important;
+          color: ${({ theme }) => theme.primary};
+          border-color: transparent;
+        }
       `
     }
     ${
